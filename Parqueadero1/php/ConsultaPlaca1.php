@@ -1,0 +1,207 @@
+<html>
+<head>
+<TITLE>Motocicleta</TITLE>
+<link rel="shortcut icon" href="../images/tire-icon.png">
+<link rel="stylesheet" type="text/css" href="../css/consult.css" media="screen"/>
+<script>
+  function actionForm(formid, act, tar)
+  {
+      document.getElementById(formid).action=act;
+      document.getElementById(formid).target=tar;
+      document.getElementById(formid).submit();
+  }
+</script>
+</head>
+<body >
+<?php
+session_start();
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
+include("Connection.php");
+include("diasr.php");
+include("Precio.php");
+
+date_default_timezone_set('America/Bogota');
+
+$placa = $_POST["placa"];
+$preciohora = $_POST["preciohora"];
+$estudiante = $_POST["stu"];
+$diario = $_POST["diario"];
+$mensual = $_POST["mensual"];
+$con = Conexion();
+$consulta = "select * from motos where placa='$placa'";
+$ejecuta= pg_query($con, $consulta);
+$numfilas = pg_numrows($ejecuta);
+if ($numfilas ==  '0')
+{
+  ?>
+  <center>
+    <h1>No existe esta Motocicleta en la Base de Datos</h1>
+    <form action="" id="form1" method="post" onsubmit="facturaent.js">
+     <label for="">Insertar Motocicleta</label></br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Placa:<input type="text" id="placa" name="placa2" value="<?php echo $placa; ?>"></br>
+      <input type="hidden" name="estado" value="t" >
+      <input type="hidden" name="horas" value="<?php echo date("H:i:s", time()); ?>" >
+      <input type="hidden" name="pago" value="<?php echo $preciohora ?>" >
+      <input type="hidden" name="fechas" value="<?php echo date('Y-m-d'); ?>" >
+      <input type="hidden" name="mensual" value="<?php echo $mensual ?>">
+      <input type="hidden" name="fecham" value="<?php echo date('Y-m-d'); ?>">
+      <input type="hidden" name="stu" value="<?php echo $estudiante; ?>">
+      <!------------------------------------------------------------------------>
+      <input type="hidden" name="onlyone" value="1">
+      <!------------------------------------------------------------------------>
+      &nbsp;&nbsp;&nbsp;Fecha Ingreso: <input type="text" id="fechai" name="fechai" value="<?php echo date('Y-m-d'); ?>"></br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hora Ingreso: <input type="text" id="horai" name="horai" value="<?php echo date("H:i:s", time()); ?>"></br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cascos: <input type="number" id="cascos" name="cascos" value="0" ></br>
+      <input type="hidden" name="diario2" value="<?php echo $diario ?>"></br>
+
+      <!--Botones Para imprimir o guardar en la base, llaman a la funcion en JS definida arriba en el head, una abre una pestaña nueva y la otra carga en la misma pagina -->
+      <!--<input type="button" value="Registrar" onClick="actionForm(this.form.id, 'IngresaPlaca.php', '_parent'); return false;" /> -->
+      <input type="button" value="Imprimir" onClick="actionForm(this.form.id, 'facturaent.php', '_blank'); return false;" />
+    </form>
+  </center>
+  <?php
+}
+else
+{
+  $fila = pg_fetch_array($ejecuta);
+  $estado = $fila["estado"];
+  $month = $fila["9"];
+  $fecham = $fila["10"];
+  $daily = $fila["8"];
+
+
+if ($estado == "f")
+    {
+      if ($month == "NO") {
+?>
+    <form id="form2" method="post">
+       <label for="">Registro Motocicleta 1</label></br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Placa:<input type="text" name="placa2" value="<?php echo $placa; ?>" /></br>
+        <input type="hidden" name="estado" value="t">
+        <input type="hidden" name="horas" value="<?php echo date("H:i:s", time()); ?>">
+        <input type="hidden" name="pago" value="<?php echo $preciohora ?>">
+        <input type="hidden" name="fechas" value="<?php echo date('Y-m-d'); ?>">
+        <input type="hidden" name="mensual" value="<?php echo $mensual ?>">
+        <input type="hidden" name="fecham" value="<?php echo date('Y-m-d'); ?>">
+        <input type="hidden" name="stu" value="<?php echo $estudiante ?>">
+        <input type="hidden" name="diario2" value="<?php echo $diario ?>"> <!--ACA PUSE LO DEL DIARIO Y ARRIBA ESTAN LAS OTRAS HIDDEN -->
+        <!------------------------------------------------------------------------>
+        <input type="hidden" name="onlyone" value="0">
+        <!------------------------------------------------------------------------>
+        &nbsp;&nbsp;&nbsp;Fecha Ingreso: <input type="date" name="fechai" value="<?php echo date('Y-m-d'); ?>" /></br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hora Ingreso: <input type="text" name="horai" value="<?php echo date("H:i:s", time()); ?>"></br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cascos: <input type="number" name="cascos" value="0">
+
+        <!--  <input type="button" value="Registrar" onClick="actionForm(this.form.id, 'updatemoto.php', '_parent'); return false;" /> -->
+        <input type="button" value="Imprimir" onClick="actionForm(this.form.id, 'facturaent.php', '_blank'); return false;" />
+    </form>
+  <?php
+      }
+      elseif ($month == "SI") {
+    ?>
+        <form id="form2" method="post">
+           <label for="">Registro Motocicleta 2</label></br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Placa:<input type="text" name="placa2" value="<?php echo $placa; ?>" /></br>
+            <input type="hidden" name="estado" value="t">
+            <input type="hidden" name="horas" value="<?php echo date("H:i:s", time()); ?>">
+            <input type="hidden" name="pago" value="<?php echo $preciohora ?>">
+            <input type="hidden" name="fechas" value="<?php echo date('Y-m-d'); ?>">
+            <input type="hidden" name="mensual" value="<?php echo $month ?>">
+            <input type="hidden" name="fecham" value="<?php echo $fecham ?>">
+            <input type="hidden" name="diario2" value="<?php echo $daily ?>">
+            <input type="hidden" name="stu" value="<?php echo $estudiante ?>">
+            <!------------------------------------------------------------------------>
+            <input type="hidden" name="onlyone" value="0">
+            <!------------------------------------------------------------------------>
+            &nbsp;&nbsp;&nbsp;Fecha Ingreso: <input type="date" name="fechai" value="<?php echo date('Y-m-d'); ?>" /></br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hora Ingreso: <input type="text" name="horai" value="<?php echo date("H:i:s", time()); ?>"></br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cascos: <input type="number" name="cascos" value="0">
+
+            <!--  <input type="button" value="Registrar" onClick="actionForm(this.form.id, 'updatemoto.php', '_parent'); return false;" /> -->
+            <input type="button" value="Imprimir" onClick="actionForm(this.form.id, 'facturaent.php', '_blank'); return false;" />
+        </form>
+        <?php
+
+      }
+    }
+else {
+  if ($estado == "t")
+  {
+    /*Pequeño Programa para calcular el Total a Pagar por el cliente se tomo en cuenta horas, dias, cascos FAVOR REVISAR!!!!!*/
+    $cascos = $fila["5"];
+    $fechaing = $fila["6"];
+    $horaing = $fila["2"];
+    $preciohorabase = $fila["4"];
+    $stu = $fila["11"];
+
+    if ($month == "NO")
+    {
+        if ($daily == "NO")
+        {
+          $Tpago = price($fechaing, $cascos, $horaing, $preciohorabase, $stu);
+        }
+         elseif ($daily == "SI") {
+           $Tpago = 3000;
+         }
+     }
+     elseif ($month == "SI") {
+       $Tpago = restantes($fecham);
+     }
+   }
+
+if ($month == "NO")
+{
+    ?>
+    <form id="form3" method="post">
+     <label for="">Registro Motocicleta</label></br>
+      &nbsp;&nbsp;&nbsp;&nbsp;Placa: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="placa2" value="<?php echo $placa; ?>"></br>
+      &nbsp;&nbsp;&nbsp;&nbsp;Hora de Entrada: &nbsp; <input type="text" name="horai" value="<?php echo $fila["2"]; ?>"></br>
+      &nbsp;&nbsp;&nbsp;&nbsp;Hora de Salida: &nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="horas" value="<?php echo date("H:i:s", time()); ?>"></br>
+      &nbsp;&nbsp;&nbsp;&nbsp;Fecha de Entrada: <input type="date" name="fechai" value="<?php echo $fila["6"] ?>"></br>
+      &nbsp;&nbsp;&nbsp;&nbsp;Fecha de Salida: &nbsp;&nbsp;<input type="date" name="fechas" value="<?php echo date('Y-m-d'); ?>"></br>
+      &nbsp;&nbsp;&nbsp;&nbsp;Total Pagar: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="number" name="pago" value="<?php echo $Tpago ?>"></br>
+      <input type="hidden" name="cascos" value="0">
+      <input type="hidden" name="estado" value="f">
+      <input type="hidden" name="diario2" value="NO">
+      <input type="hidden" name="fecham" value="<?php echo date('Y-m-d'); ?>">
+      <input type="hidden" name="mensual" value="NO">
+
+      <!--<input type="button" value="Registrar" onClick="actionForm(this.form.id, 'updatemoto.php', '_parent'); return false;" />-->
+      <input type="button" value="Imprimir" onClick="actionForm(this.form.id, 'facturasal.php', '_blank'); return false;" />
+    </form>
+<?php
+}
+elseif ($month == "SI") {
+  if ($Tpago > 0) { #creo que es para cambiar el campo en la base de datos y quitarle el "privilegio" de la mensualidad
+    $mens = "SI";
+  }
+  else {
+    $mens = "NO";
+  }
+  ?>
+
+    <form id="form3" method="post">
+     <label for="">Registro Motocicleta</label></br>
+      &nbsp;&nbsp;&nbsp;&nbsp;Placa: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="placa2" value="<?php echo $placa; ?>"></br>
+      &nbsp;&nbsp;&nbsp;&nbsp;Hora de Entrada: &nbsp; <input type="text" name="horai" value="<?php echo $fila["2"]; ?>"></br>
+      &nbsp;&nbsp;&nbsp;&nbsp;Hora de Salida: &nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="horas" value="<?php echo date("H:i:s", time()); ?>"></br>
+      &nbsp;&nbsp;&nbsp;&nbsp;Fecha de Entrada: <input type="date" name="fechai" value="<?php echo $fila["6"] ?>"></br>
+      &nbsp;&nbsp;&nbsp;&nbsp;Fecha de Salida: &nbsp;&nbsp;<input type="date" name="fechas" value="<?php echo date('Y-m-d'); ?>"></br>
+      &nbsp;&nbsp;&nbsp;&nbsp;Dias Restantes: &nbsp;&nbsp;&nbsp;&nbsp; <input type="number" name="pago" value="<?php echo $Tpago ?>"></br>
+      <input type="hidden" name="cascos" value="0">
+      <input type="hidden" name="estado" value="f">
+      <input type="hidden" name="diario2" value="NO">
+      <input type="hidden" name="fecham" value="<?php echo $fecham ?>">
+      <input type="hidden" name="mensual" value="<?php echo $mens ?>">
+
+      <!--<input type="button" value="Registrar" onClick="actionForm(this.form.id, 'updatemoto.php', '_parent'); return false;" />-->
+      <input type="button" value="Imprimir" onClick="actionForm(this.form.id, 'facturasal2.php', '_blank'); return false;" />
+    </form>
+  <?php
+}
+  }
+}
+?>
+ </body>
+ </html>
