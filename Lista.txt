@@ -5,16 +5,16 @@
 	-Vista de Imprimir (?)
 	-Vista de Balance Diario/Semanal/Mensual
 -BackEnd-> Python, SQL, PL
-	
+
 	1. Base de Datos
 		-Tabla de Motos
 		-Tabla de Carros
 		-Tabla General de Registros en donde se incluyen motos y carros (de aca se sacara 			 lo del balance diario)
 
 	2. Programacion
-		-Enlace con la base de datos
+		-Enlace con la base de datos (Listo)
 		-Autenticacion (Login) con la base de datos
-		-Creacion de registros
+		-Creacion de registros (Listo)
 		-Update de Registros
 		-Creacion y Eliminacion de factura a imprimir
 			-Consulta en la base de datos
