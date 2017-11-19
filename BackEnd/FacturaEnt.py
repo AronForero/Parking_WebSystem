@@ -1,9 +1,8 @@
-from reportlab.platypus import (BaseDocTemplate, PageTemplate, Frame, Paragraph, NextPageTemplate, PageBreak)
+from reportlab.platypus import (BaseDocTemplate, PageTemplate, Frame, Paragraph, NextPageTemplate)
 from reportlab.lib.styles import ParagraphStyle
 from reportlab.lib.enums import TA_LEFT, TA_CENTER
 from reportlab.lib.colors import (black, purple, white,yellow)
-from reportlab.lib.units import cm
-
+from reportlab.lib.units import cm #Importo la medida Centimetros
 
 def stylesheet():
     styles= {
@@ -48,11 +47,16 @@ def stylesheet():
         parent=styles['default'],
         leading=38,
     )
+    styles['serial'] = ParagraphStyle(
+        'serial',
+        parent=styles['default'],
+        leading=38, #Espacio entre lineas
+    )
     return styles
 
 def build_flowables(stylesheet, placa, Hora, Fecha, Cascos):
     return [
-            NextPageTemplate('Segunda Columna'),
+            NextPageTemplate('Segunda Columna'), #Seleccionando el PageTemplate
             Paragraph("Parqueadero...", stylesheet['title']),
             Paragraph('Leidy Johana Forero Paez - Nit. ##########-#', stylesheet['default']),
             Paragraph('Cll 42 #11-## - Cel. ##########', stylesheet['jump']),
@@ -60,12 +64,12 @@ def build_flowables(stylesheet, placa, Hora, Fecha, Cascos):
             Paragraph('Hora:..............'+ Hora, stylesheet['default']),
             Paragraph('Fecha:............'+ Fecha, stylesheet['default']),
             Paragraph('Cascos:..........'+ Cascos, stylesheet['default']),
-            #PageBreak(),
-            Paragraph('Cas'+ Cascos, stylesheet['default'])
+            Paragraph("01", stylesheet['default'])
            ]
 
 def build_pdf(filename, flowables):
     doc = BaseDocTemplate(filename, pagesize=(8*cm,5*cm), leftMargin=0.5*cm, topMargin=2*cm, bottomMargin=0*cm)
+    #Se agrega el PageTemplate, tiene como argumento una lista de PageTemplate, el cual tiene un parametro id y otro frames = []
     doc.addPageTemplates([PageTemplate(id="Segunda Columna", frames=[Frame(0.2*cm, -0.4*cm, 6*cm, 5.5*cm, id='1'),Frame(5.8*cm,4*cm,2*cm,0.9*cm, showBoundary=1, id='2')])])
     doc.build(flowables)
 
