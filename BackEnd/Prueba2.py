@@ -7,7 +7,7 @@ def stylesheet():
     styles= {
         'default': ParagraphStyle(
             'default',
-            fontName='Helvetica',
+            fontName='Times-Roman',
             fontSize=10,
             leading=12,
             leftIndent=0,
@@ -37,35 +37,38 @@ def stylesheet():
         'title',
         parent=styles['default'],
         fontName='Helvetica-Bold',
-        fontSize=14,
-        leading=18,
-        textColor=black,
+        fontSize=24,
+        leading=42,
+        alignment=TA_CENTER,
+        textColor=purple,
     )
-    styles['jump'] = ParagraphStyle(
-        'jump',
+    styles['alert'] = ParagraphStyle(
+        'alert',
         parent=styles['default'],
-        leading=20,
+        leading=14,
+        backColor=yellow,
+        borderColor=black,
+        borderWidth=1,
+        borderPadding=5,
+        borderRadius=2,
+        spaceBefore=10,
+        spaceAfter=10,
     )
     return styles
 
-def build_flowables(stylesheet, placa, Hora, Fecha, Cascos):
+
+def build_flowables(stylesheet):
     return [
-            Paragraph("Parqueadero...", stylesheet['title']),
-            Paragraph('Leidy Johana Forero Paez - Nit. ##########-#', stylesheet['default']),
-            Paragraph('Cll 42 #11-## - Cel. ##########', stylesheet['jump']),
-            Paragraph('Placa: '+ placa, stylesheet['default']),
-            Paragraph('Hora: '+ Hora, stylesheet['default']),
-            Paragraph('Fecha: '+ Fecha, stylesheet['default']),
-            Paragraph('Cascos: '+ Cascos, stylesheet['default'])
-           ]
+        Paragraph("I'm a title!", stylesheet['title']),
+        Paragraph('some text. ' * 30, stylesheet['default']),
+        Paragraph('This is important!', stylesheet['alert']),
+        Paragraph('more text. ' * 30, stylesheet['default']),
+    ]
+
 
 def build_pdf(filename, flowables):
-    doc = BaseDocTemplate(filename, pagesize=(316.58,150.0), leftMargin=1, topMargin=1, bottomMargin=1)
+    doc = BaseDocTemplate(filename, pagesize=(316.58,150.0), leftMargin=1, topMargin=1)
     doc.addPageTemplates([PageTemplate(frames=[Frame(doc.leftMargin, doc.bottomMargin, doc.width, doc.height, id=None)])])
     doc.build(flowables)
 
-placa = "msn24b"
-Hora = "15:30"
-Fecha = "19/10/2017"
-Cascos = "1"
-build_pdf('Factura_Entrada.pdf', build_flowables(stylesheet(), placa, Hora, Fecha, Cascos))
+build_pdf('p0150_1.pdf', build_flowables(stylesheet()))
