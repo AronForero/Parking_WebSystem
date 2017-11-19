@@ -1,7 +1,9 @@
-from reportlab.platypus import (BaseDocTemplate, PageTemplate, Frame, Paragraph)
+from reportlab.platypus import (BaseDocTemplate, PageTemplate, Frame, Paragraph, NextPageTemplate, PageBreak)
 from reportlab.lib.styles import ParagraphStyle
 from reportlab.lib.enums import TA_LEFT, TA_CENTER
 from reportlab.lib.colors import (black, purple, white,yellow)
+from reportlab.lib.units import cm
+
 
 def stylesheet():
     styles= {
@@ -38,30 +40,33 @@ def stylesheet():
         parent=styles['default'],
         fontName='Helvetica-Bold',
         fontSize=14,
-        leading=18,
+        leading=22,
         textColor=black,
     )
     styles['jump'] = ParagraphStyle(
         'jump',
         parent=styles['default'],
-        leading=20,
+        leading=38,
     )
     return styles
 
 def build_flowables(stylesheet, placa, Hora, Fecha, Cascos):
     return [
+            NextPageTemplate('Segunda Columna'),
             Paragraph("Parqueadero...", stylesheet['title']),
             Paragraph('Leidy Johana Forero Paez - Nit. ##########-#', stylesheet['default']),
             Paragraph('Cll 42 #11-## - Cel. ##########', stylesheet['jump']),
-            Paragraph('Placa: '+ placa, stylesheet['default']),
-            Paragraph('Hora: '+ Hora, stylesheet['default']),
-            Paragraph('Fecha: '+ Fecha, stylesheet['default']),
-            Paragraph('Cascos: '+ Cascos, stylesheet['default'])
+            Paragraph('Placa:.............'+ placa, stylesheet['default']),
+            Paragraph('Hora:..............'+ Hora, stylesheet['default']),
+            Paragraph('Fecha:............'+ Fecha, stylesheet['default']),
+            Paragraph('Cascos:..........'+ Cascos, stylesheet['default']),
+            #PageBreak(),
+            Paragraph('Cas'+ Cascos, stylesheet['default'])
            ]
 
 def build_pdf(filename, flowables):
-    doc = BaseDocTemplate(filename, pagesize=(316.58,150.0), leftMargin=1, topMargin=1, bottomMargin=1)
-    doc.addPageTemplates([PageTemplate(frames=[Frame(doc.leftMargin, doc.bottomMargin, doc.width, doc.height, id=None)])])
+    doc = BaseDocTemplate(filename, pagesize=(8*cm,5*cm), leftMargin=0.5*cm, topMargin=2*cm, bottomMargin=0*cm)
+    doc.addPageTemplates([PageTemplate(id="Segunda Columna", frames=[Frame(0.2*cm, -0.4*cm, 6*cm, 5.5*cm, id='1'),Frame(5.8*cm,4*cm,2*cm,0.9*cm, showBoundary=1, id='2')])])
     doc.build(flowables)
 
 placa = "msn24b"
