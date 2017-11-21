@@ -1,7 +1,7 @@
 from reportlab.platypus import (BaseDocTemplate, PageTemplate, Frame, Paragraph, NextPageTemplate)
 from reportlab.lib.styles import ParagraphStyle
 from reportlab.lib.enums import TA_LEFT, TA_CENTER
-from reportlab.lib.colors import (black, purple, white,yellow)
+from reportlab.lib.colors import black
 from reportlab.lib.units import cm #Importo la medida Centimetros
 
 def stylesheet():
@@ -72,7 +72,7 @@ def build_pdf(filename, flowables):
     #Se agrega el PageTemplate, tiene como argumento una lista de PageTemplate, el cual tiene un parametro id y otro frames = []
     doc.addPageTemplates([PageTemplate(id="Segunda Columna", frames=[Frame(0.2*cm, -0.4*cm, 6*cm, 5.5*cm, id='1'),Frame(5.8*cm,4*cm,2*cm,0.9*cm, showBoundary=1, id='2')])])
     doc.build(flowables)
-
+#______________________________________________________FUNCIONAMIENTO____________________________________________________
 placa = "msn24b"
 Hora = "15:30"
 Fecha = "19/10/2017"
