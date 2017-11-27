@@ -11,7 +11,7 @@ def InsertarPlaca(cur, placa, tipo):
     fecha_entrada = str(dia)+"/"+str(mes)+"/"+str(anio)
     fecha_salida = fecha_entrada
 
-    if cur.execute("INSERT INTO tipo values('placa', 'estado', 'hora_entrada', 'hora_salida', 'fecha_entrada', 'fecha_salida', 0)"):
+    if cur.execute("INSERT INTO vehiculos values('placa', 'estado', 'hora_entrada', 'hora_salida', 'fecha_entrada', 'fecha_salida', 0, 'tipo')"):
         return "La placa ha sido guardada en la base de datos correctamente."
     else:
         return "ERROR... Por Favor Contacte al Administrador."

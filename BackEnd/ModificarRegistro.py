@@ -14,7 +14,14 @@ def modificar(row, cur):
 
 
     fecha_salida = fecha_entrada
-    tipo = row[2]
+    tipo = row[-1] #la ultima columna
 
-    if row[1] == "adentro"
-    x = cur.execute("UPDATE ")
+    if row[1] == 1: #Se evalua el estado del vehiculo '0' = Fuera, '1' = Dentro
+        #hacer la modificacion en la BD
+        x = cur.execute("UPDATE vehiculos")
+        #Crear e imprimir la factura de SALIDA!!
+        #build_pdf('Factura_Entrada.pdf', build_flowables(stylesheet(), placa, Hora, Fecha, Cascos))
+    else:
+        #Hacer la modificacion en la BD
+        x = cur.execute("UPDATE vehiculos")
+        #Crear e imprimir la factura de ENTRADA
