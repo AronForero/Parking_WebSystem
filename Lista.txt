@@ -7,9 +7,8 @@
 -BackEnd-> Python, SQL, PL
 
 	1. Base de Datos
-		-Tabla de Motos
-		-Tabla de Carros
-		-Tabla General de Registros en donde se incluyen motos y carros (de aca se sacara 			 lo del balance diario)
+		-Tabla de Vehiculos (incluira Motos y Carros en un campo "tipo")
+		-Tabla General de Registros en donde se incluyen los vehiculos (de aca se sacara el balance diario)
 
 	2. Programacion
 		-Enlace con la base de datos (Listo)
