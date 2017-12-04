@@ -1,0 +1,8 @@
+Creacion de clase para usar el archivo .ui:
+http://www.pythondiario.com/2014/11/primera-aplicacion-con-qt-designer-y_16.html
+___________________________________________________
+Differences between pyqt4 and pyqt5:
+http://pyqt.sourceforge.net/Docs/PyQt5/pyqt4_differences.html
+___________________________________________________
+Github con ayuda a resolver el problema del xcb:
+https://github.com/Studio3T/robomongo/issues/1385
