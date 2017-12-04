@@ -69,7 +69,7 @@
       else {
         $diasr = ((31-$Dia)+$Day);
       }
-    ###################################################### Necesito poner a imprimir los resultados de cada consulta y ya deberia
+    ######################################################### Necesito poner a imprimir los resultados de cada consulta y ya deberia
     ###############################funcionar :v
     $con = Conexion();
     /****************************************************************************/

@@ -24,7 +24,7 @@ $pdf->Cell(0,5,"Direccion - Cel. ##########",0);
 $pdf->Ln(3);
 $pdf->Cell(20,5,"Atendido por:",0);
 $pdf->SetFont('Courier', 'B', 7);
-$pdf->Cell(25,5,"###### ######",0);
+$pdf->Cell(25,5,"########## #######",0);
     /******************************/
 
 $pdf->Ln();
@@ -54,6 +54,6 @@ $pdf->Output("factura-parking.pdf","I");
 
 #$pdf->AutoPrint(true);
 #$pdf->Output();
-factent2($estado, $horai, $horas, $pago, $cascos, $fechai, $fechas, $diario2, $mensual, $fecham, $placa2);
+factent2($placa2, $estado, $horai, $horas, $pago, $cascos, $fechai, $fechas, $diario2);
 #header("refresh: 2; url=../ConsultaPlaca.php");
 ?>

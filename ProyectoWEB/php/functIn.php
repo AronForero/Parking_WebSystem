@@ -1,5 +1,5 @@
 <?php
-function factent($placa2, $estado, $horai, $horas, $pago, $cascos, $fechai, $fechas, $diario2, $mensual, $fecham, $stu)
+function factent($placa2, $estado, $horai, $horas, $pago, $cascos, $fechai, $fechas, $diario2)
 {
   /********************* Envio a la base de datos *******************************/
   error_reporting(E_ALL);
@@ -9,7 +9,7 @@ function factent($placa2, $estado, $horai, $horas, $pago, $cascos, $fechai, $fec
   if ($diario2 == "SI") {
     $pago = 3000;
   }
-  $insert = "insert into motos(placa, estado, horae, horas, pago, casco, fechae, fechas, diario, mes, fecham, student) values('$placa2', '$estado', '$horai', '$horas', '$pago', '$cascos', '$fechai', '$fechas', '$diario2', '$mensual', '$fecham', '$stu')";
+  $insert = "insert into vehiculo(placa, estado, horae, horas, pago, casco, fechae, fechas, diario) values('$placa2', '$estado', '$horai', '$horas', '$pago', '$cascos', '$fechai', '$fechas', '$diario2')";
   $result = pg_query($conexion, $insert);
 }
 ?>

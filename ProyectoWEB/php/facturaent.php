@@ -22,11 +22,11 @@ $pdf->SetFont('Courier', '', 6);
 $pdf->Cell(0,5,"Leidy Johana Forero Paez. - Nit. #.###.###.###-#",0);
 $pdf->Ln(3);
 $pdf->SetFont('Courier', '', 7);
-$pdf->Cell(0,5,"Direccion - Cel. ##########",0);
+$pdf->Cell(0,5,"Direccion - Cel. ###########",0);
 $pdf->Ln(3);
 $pdf->Cell(20,5,"Atendido por:",0);
 $pdf->SetFont('Courier', 'B', 7);
-$pdf->Cell(25,5,"###### #######",0);
+$pdf->Cell(25,5,"####### #######",0);
 
 $pdf->Ln(5);
 $pdf->SetFont('Courier', '', 10);
@@ -45,10 +45,10 @@ $pdf->Cell(45,3,$cascos,0);
 #$pdf->Output("factura-empresa.pdf","I");
 
 if ($onlyone == "1") {
-    factent($placa2, $estado, $horai, $horas, $pago, $cascos, $fechai, $fechas, $diario2, $mensual, $fecham, $stu);
+    factent($placa2, $estado, $horai, $horas, $pago, $cascos, $fechai, $fechas, $diario2);
 }
 elseif ($onlyone == "0") {
-    factent2($estado, $horai, $horas, $pago, $cascos, $fechai, $fechas, $diario2, $mensual, $fecham, $placa2, $stu);
+    factent2($estado, $horai, $horas, $pago, $cascos, $fechai, $fechas, $diario2, $mensual);
 }
 
 $pdf->AutoPrint(true);

@@ -78,9 +78,6 @@ if ($estado == "f")
         <input type="hidden" name="horas" value="<?php echo date("H:i:s", time()); ?>">
         <input type="hidden" name="pago" value="<?php echo $preciohora ?>">
         <input type="hidden" name="fechas" value="<?php echo date('Y-m-d'); ?>">
-        <input type="hidden" name="mensual" value="<?php echo $mensual ?>">
-        <input type="hidden" name="fecham" value="<?php echo date('Y-m-d'); ?>">
-        <input type="hidden" name="stu" value="<?php echo $estudiante ?>">
         <input type="hidden" name="diario2" value="<?php echo $diario ?>"> <!--ACA PUSE LO DEL DIARIO Y ARRIBA ESTAN LAS OTRAS HIDDEN -->
         <!------------------------------------------------------------------------>
         <input type="hidden" name="onlyone" value="0"> <!--este campo se utiliza para saber si es la primera vez que ingresa la motocicleta "hacer update o insert"-->
@@ -108,7 +105,7 @@ else {
     {
         if ($daily == "NO")
         {
-          $Tpago = price($fechaing, $cascos, $horaing, $preciohorabase, $stu);
+          $Tpago = price($fechaing, $cascos, $horaing, $preciohorabase);
         }
          elseif ($daily == "SI") {
            $Tpago = 3000;
@@ -128,8 +125,6 @@ else {
       <input type="hidden" name="cascos" value="0">
       <input type="hidden" name="estado" value="f">
       <input type="hidden" name="diario2" value="NO">
-      <input type="hidden" name="fecham" value="<?php echo date('Y-m-d'); ?>">
-      <input type="hidden" name="mensual" value="NO">
 
       <!--<input type="button" value="Registrar" onClick="actionForm(this.form.id, 'updatemoto.php', '_parent'); return false;" />-->
       <input type="button" value="Imprimir" onClick="actionForm(this.form.id, 'facturasal.php', '_blank'); return false;" />

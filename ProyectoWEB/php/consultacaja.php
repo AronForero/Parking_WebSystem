@@ -57,7 +57,7 @@
         include("Connection.php");
         date_default_timezone_set('America/Bogota');
         $date = date('Y-m-d');
-        $consulta = "select sum(pago) from backup where fechas='$date'";
+        $consulta = "select sum(pago) from backup where fechas='$date'"; //Agregar consulta para saber cuantos vehiculos entraron y cuantos de cada tipo
         $con = Conexion();
         $result = pg_query($con, $consulta);
         $fila = pg_fetch_array($result);
