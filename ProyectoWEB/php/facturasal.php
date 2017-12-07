@@ -54,6 +54,7 @@ $pdf->Output("factura-parking.pdf","I");
 
 #$pdf->AutoPrint(true);
 #$pdf->Output();
-factent2($placa2, $estado, $horai, $horas, $pago, $cascos, $fechai, $fechas, $diario2);
+factent2($placa2, $estado, $horai, $horas, $pago, $cascos, $fechai, $fechas, $diario2, $tipo);
+          #se agrego la variable tipo como parametro
 #header("refresh: 2; url=../ConsultaPlaca.php");
 ?>

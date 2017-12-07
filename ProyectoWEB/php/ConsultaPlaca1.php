@@ -25,7 +25,6 @@ date_default_timezone_set('America/Bogota');
 
 $placa = $_POST["placa"];
 $preciohora = $_POST["preciohora"];
-$estudiante = $_POST["stu"];
 $diario = $_POST["diario"];
 $tipo = $_POST["tipo"]
 $con = Conexion();
@@ -107,11 +106,9 @@ else {
 
         if ($daily == "NO")
         {
-          $Tpago = price($fechaing, $cascos, $horaing, $preciohorabase);
+          $Tpago = price($fechaing, $cascos, $horaing, $preciohorabase, $tipo);
         }
-         elseif ($daily == "SI") {
-           $Tpago = 3000;
-         }
+        #se elimino la parte del dia, se tomara en cuenta en la funcion price
    } //Fin del programa para calcular el precio
 
     ?>

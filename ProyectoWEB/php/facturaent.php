@@ -24,7 +24,7 @@ $pdf->Ln(3);
 $pdf->SetFont('Courier', '', 7);
 $pdf->Cell(0,5,"Direccion - Cel. ###########",0);
 $pdf->Ln(3);
-$pdf->Cell(20,5,"Atendido por:",0);
+$pdf->Cell(20,5,"Atendido por:",0); #hay que eliminar esta parte... revisar para dejar cuadrada la factura y agregar serial
 $pdf->SetFont('Courier', 'B', 7);
 $pdf->Cell(25,5,"####### #######",0);
 
@@ -45,10 +45,12 @@ $pdf->Cell(45,3,$cascos,0);
 #$pdf->Output("factura-empresa.pdf","I");
 
 if ($onlyone == "1") {
-    factent($placa2, $estado, $horai, $horas, $pago, $cascos, $fechai, $fechas, $diario2);
+    factent($placa2, $estado, $horai, $horas, $pago, $cascos, $fechai, $fechas, $diario2, $tipo);
+    #se agrego la variable tipo como parametro
 }
 elseif ($onlyone == "0") {
-    factent2($estado, $horai, $horas, $pago, $cascos, $fechai, $fechas, $diario2, $mensual);
+    factent2($estado, $horai, $horas, $pago, $cascos, $fechai, $fechas, $diario2, $tipo);
+    #se agrego la variable tipo como parametro
 }
 
 $pdf->AutoPrint(true);

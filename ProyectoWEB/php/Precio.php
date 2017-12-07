@@ -1,5 +1,5 @@
 <?php
-function price($fechaing, $cascos, $horaing, $preciohorabase = -1, $stu) #revisar el parametro por defecto
+function price($fechaing, $cascos, $horaing, $preciohorabase = -1, $tipo) #revisar el parametro por defecto
 {
   error_reporting(E_ALL);
   ini_set('display_errors', '1');
@@ -8,6 +8,13 @@ function price($fechaing, $cascos, $horaing, $preciohorabase = -1, $stu) #revisa
   $año = date('Y');
   $Month = date('m');
   $Day = date('d');
+
+  if ($tipo == "MOTO") {
+    $preciodia = 2500;
+  }
+  else {
+    $preciodia = 10000;
+  }
 
     if ($Month == date("m", strtotime($fechaing)))
     {
@@ -20,7 +27,7 @@ function price($fechaing, $cascos, $horaing, $preciohorabase = -1, $stu) #revisa
             $Tpago=$preciohorabase+($cascos*100);
           }
           else {
-              $Tpago = ($difhoras*$preciohorabase)+($cascos*100);
+              $Tpago = ($difhoras*$preciohorabase)+($cascos*200);
           }
       }
       else {
@@ -34,7 +41,7 @@ function price($fechaing, $cascos, $horaing, $preciohorabase = -1, $stu) #revisa
         if ($res <= 0) {
            $res = 0; /* si res es 0 o menos, es porque era menor a 4 entonces se tomara como 0 para que no afecte la ecuacion abajo*/
           }
-        $Tpago = ($h24*3000)+($difdias*3000)+($res*$preciohorabase)+($cascos*100); /*Si difdias=0 no afectara, y si res=0 no afectara, si h24=0 no afectara*/
+        $Tpago = ($h24*$preciodia*2)+($difdias*$preciodia*2)+($res*$preciohorabase)+($cascos*200); /*Si difdias=0 no afectara, y si res=0 no afectara, si h24=0 no afectara*/
         }
     /*******************************************************************************/
       return $Tpago;
@@ -100,7 +107,7 @@ function price($fechaing, $cascos, $horaing, $preciohorabase = -1, $stu) #revisa
           if ($res <= 0) {
              $res = 0; /* si res es 0 o menos, es porque era menor a 4 entonces se tomara como 0 para que no afecte la ecuacion abajo*/
             }
-          $Tpago = ($h24*3000)+($difdias*3000)+($res*$preciohorabase)+($cascos*100); /*Si difdias=0 no afectara, y si res=0 no afectara, si h24=0 no afectara*/
+          $Tpago = ($h24*3000)+($difdias*3000)+($res*$preciohorabase)+($cascos*200); /*Si difdias=0 no afectara, y si res=0 no afectara, si h24=0 no afectara*/
           }
       /*******************************************************************************/
         return $Tpago;

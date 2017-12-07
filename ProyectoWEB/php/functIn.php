@@ -1,15 +1,14 @@
 <?php
-function factent($placa2, $estado, $horai, $horas, $pago, $cascos, $fechai, $fechas, $diario2)
+function factent($placa2, $estado, $horai, $horas, $pago, $cascos, $fechai, $fechas, $diario2, $tipo) #se agrego la variable tipo como parametro
 {
   /********************* Envio a la base de datos *******************************/
   error_reporting(E_ALL);
   ini_set('display_errors', '1');
   require("Connection.php");
   $conexion = Conexion();
-  if ($diario2 == "SI") {
-    $pago = 3000;
-  }
-  $insert = "insert into vehiculo(placa, estado, horae, horas, pago, casco, fechae, fechas, diario) values('$placa2', '$estado', '$horai', '$horas', '$pago', '$cascos', '$fechai', '$fechas', '$diario2')";
+  #Se eliminaron algunas lineas innecesarias para el calculo del pago, ya que a la funcion le llega un
+  #parametro con este valor
+  $insert = "insert into vehiculo(placa, tipo, estado, horae, horas, pago, casco, fechae, fechas, diario) values('$placa2', '$tipo', '$estado', '$horai', '$horas', '$pago', '$cascos', '$fechai', '$fechas', '$diario2')";
   $result = pg_query($conexion, $insert);
 }
 ?>
