@@ -27,9 +27,9 @@ $placa = $_POST["placa"];
 $preciohora = $_POST["preciohora"];
 $estudiante = $_POST["stu"];
 $diario = $_POST["diario"];
-$mensual = $_POST["mensual"];
+$tipo = $_POST["tipo"]
 $con = Conexion();
-$consulta = "select * from motos where placa='$placa'";
+$consulta = "select * from vehiculo where placa='$placa'";
 $ejecuta= pg_query($con, $consulta);
 $numfilas = pg_numrows($ejecuta);
 if ($numfilas ==  '0')
@@ -44,6 +44,8 @@ if ($numfilas ==  '0')
       <input type="hidden" name="horas" value="<?php echo date("H:i:s", time()); ?>" >
       <input type="hidden" name="pago" value="<?php echo $preciohora ?>" >
       <input type="hidden" name="fechas" value="<?php echo date('Y-m-d'); ?>" >
+      <input type="hidden" name="tipo" value="<?php echo $tipo ?>">
+      <!--Se agrego un hidden con el tipo de vehiculo-->
       <!------------------------------------------------------------------------>
       <input type="hidden" name="onlyone" value="1">
       <!------------------------------------------------------------------------>
@@ -63,8 +65,8 @@ else
 {
   $fila = pg_fetch_array($ejecuta);
   $estado = $fila["estado"];
-  $month = $fila["9"];
-  $fecham = $fila["10"];
+  #se elimino variable month que indicaba si se habia pagado mensualidad
+  #se elimino la variable que indicaba la fecha de cuando se acababa la mensualidad
   $daily = $fila["8"];
 
 
@@ -79,6 +81,8 @@ if ($estado == "f")
         <input type="hidden" name="pago" value="<?php echo $preciohora ?>">
         <input type="hidden" name="fechas" value="<?php echo date('Y-m-d'); ?>">
         <input type="hidden" name="diario2" value="<?php echo $diario ?>"> <!--ACA PUSE LO DEL DIARIO Y ARRIBA ESTAN LAS OTRAS HIDDEN -->
+        <input type="hidden" name="tipo" value="<?php echo $tipo ?>">
+        <!--se agrego un hidden para la variable tipo-->
         <!------------------------------------------------------------------------>
         <input type="hidden" name="onlyone" value="0"> <!--este campo se utiliza para saber si es la primera vez que ingresa la motocicleta "hacer update o insert"-->
         <!------------------------------------------------------------------------>
@@ -99,10 +103,8 @@ else {
     $fechaing = $fila["6"];
     $horaing = $fila["2"];
     $preciohorabase = $fila["4"];
-    $stu = $fila["11"]; #ya no sera 11, se redujo la cantidad de campos
+    #se elimino variable stu, que indicaba si era un estudiante
 
-    if ($month == "NO")
-    {
         if ($daily == "NO")
         {
           $Tpago = price($fechaing, $cascos, $horaing, $preciohorabase);
@@ -110,7 +112,6 @@ else {
          elseif ($daily == "SI") {
            $Tpago = 3000;
          }
-     }
    } //Fin del programa para calcular el precio
 
     ?>
