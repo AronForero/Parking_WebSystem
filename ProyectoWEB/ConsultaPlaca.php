@@ -26,8 +26,9 @@ if ($_SESSION['user']!=null) {
 
              <label for="">Consulta placa</label></br>
              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Placa:&nbsp;&nbsp;&nbsp;<input type="text" name="placa" id="placa" placeholder="Placa">
-             &nbsp;&nbsp;Precio/Hora:<input type="number" name="preciohora" value="700"></br>
+             &nbsp;&nbsp;Precio/Hora:<input type="number" name="preciohora" placeholder="Predeterminado"></br>
              &nbsp;&nbsp;&nbsp;&nbsp;Pago Diario: &nbsp;&nbsp;SI<input type="radio" name="diario" value="SI"> NO<input type="radio" name="diario" value="NO" checked></br>
+             &nbsp;&nbsp;&nbsp;&nbsp;Tipo Vehiculo: &nbsp;&nbsp;Motocicleta<input type="radio" name="tipo" value="SI" checked=""> Carro<input type="radio" name="tipo" value="NO"></br>
             <input type="submit" name="" value="Consultar" ></br>
 
 

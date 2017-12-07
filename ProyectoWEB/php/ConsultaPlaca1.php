@@ -99,7 +99,7 @@ else {
     $fechaing = $fila["6"];
     $horaing = $fila["2"];
     $preciohorabase = $fila["4"];
-    $stu = $fila["11"];
+    $stu = $fila["11"]; #ya no sera 11, se redujo la cantidad de campos
 
     if ($month == "NO")
     {

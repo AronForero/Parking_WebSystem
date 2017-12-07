@@ -1,5 +1,5 @@
 <?php
-function price($fechaing, $cascos, $horaing, $preciohorabase, $stu)
+function price($fechaing, $cascos, $horaing, $preciohorabase = -1, $stu) #revisar el parametro por defecto
 {
   error_reporting(E_ALL);
   ini_set('display_errors', '1');
@@ -8,11 +8,6 @@ function price($fechaing, $cascos, $horaing, $preciohorabase, $stu)
   $año = date('Y');
   $Month = date('m');
   $Day = date('d');
-
-  #_______________________________________________________________________________________________________
-  #__________________________________________________PARTICULAR ABAJO_____________________________________
-  #_______________________________________________________________________________________________________
-  #_______________________________________________________________________________________________________
 
     if ($Month == date("m", strtotime($fechaing)))
     {
