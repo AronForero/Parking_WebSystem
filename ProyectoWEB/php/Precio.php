@@ -1,5 +1,5 @@
 <?php
-function price($fechaing, $cascos, $horaing, $preciohorabase = -1, $tipo) #revisar el parametro por defecto
+function price($fechaing, $cascos, $horaing, $preciohorabase = -1, $tipo, $daily) #revisar el parametro por defecto
 {
   error_reporting(E_ALL);
   ini_set('display_errors', '1');
@@ -17,25 +17,52 @@ function price($fechaing, $cascos, $horaing, $preciohorabase = -1, $tipo) #revis
     $preciodia = 10000;
   }
 
+  if ($preciohorabase == -1) {
+    if ($tipo == "MOTO") {
+      $preciohorabase = 1000;
+    }
+    else {
+      $preciohorabase = 2000;
+    }
+  }
+
     if ($Month == date("m", strtotime($fechaing)))
     {
     /************************************Parte de los Dias*************************************************/
       if ($Day == date("d", strtotime($fechaing)))
       {
         #echo "Los dias son iguales";
-          $difhoras = (date("H:i:s", time()))-$horaing;
-          if ($difhoras == 0) {
-          #se creo la variable difminutos arriba
-              if ($difminutos >= 15) {
-                $Tpago = $preciohorabase + ($cascos*200)
+            $difhoras = (date("H:i:s", time()))-$horaing;
+            if ($daily == "SI")
+            {
+                if ($difhoras <= 12) {
+                  $Tpago = $preciodia + ($cascos*200);
+                }
+                else {
+                  if ($difminutos >= 15) {
+                      $Tpago = $preciodia + ($cascos*200) + $difhoras*$preciohorabase;
+                  }
+                  else {
+                    $Tpago = $preciodia + ($cascos*200) + $difhoras*$preciohorabase - $preciohorabase;
+                  }
+                }
+            }
+            else {
+              if ($difhoras == 0)
+              {
+                #se creo la variable difminutos arriba
+                    if ($difminutos >= 15) {
+                      $Tpago = $preciohorabase + ($cascos*200)
+                    }
+                    else {
+                      $Tpago= 0;
+                    }
               }
               else {
-                $Tpago= 0;
+                  $Tpago = ($difhoras*$preciohorabase)+($cascos*200);
               }
-          }
-          else {
-              $Tpago = ($difhoras*$preciohorabase)+($cascos*200);
-          }
+            }
+
       }
       else {
         #echo "no son iguales los dias";

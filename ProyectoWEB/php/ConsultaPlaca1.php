@@ -66,8 +66,7 @@ else
   $estado = $fila["estado"];
   #se elimino variable month que indicaba si se habia pagado mensualidad
   #se elimino la variable que indicaba la fecha de cuando se acababa la mensualidad
-  $daily = $fila["8"];
-
+  $daily = $fila["9"];
 
 if ($estado == "f")
     {
@@ -104,10 +103,8 @@ else {
     $preciohorabase = $fila["4"];
     #se elimino variable stu, que indicaba si era un estudiante
 
-        if ($daily == "NO")
-        {
-          $Tpago = price($fechaing, $cascos, $horaing, $preciohorabase, $tipo);
-        }
+          $Tpago = price($fechaing, $cascos, $horaing, $preciohorabase, $tipo, $daily);
+
         #se elimino la parte del dia, se tomara en cuenta en la funcion price
    } //Fin del programa para calcular el precio
 
