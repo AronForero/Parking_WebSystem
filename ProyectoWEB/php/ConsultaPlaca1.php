@@ -18,7 +18,6 @@ session_start();
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
 include("Connection.php");
-include("diasr.php");
 include("Precio.php");
 
 date_default_timezone_set('America/Bogota');
@@ -26,11 +25,21 @@ date_default_timezone_set('America/Bogota');
 $placa = $_POST["placa"];
 $preciohora = $_POST["preciohora"];
 $diario = $_POST["diario"];
-$tipo = $_POST["tipo"]
+$tipo = $_POST["tipo"];
 $con = Conexion();
 $consulta = "select * from vehiculo where placa='$placa'";
 $ejecuta= pg_query($con, $consulta);
 $numfilas = pg_numrows($ejecuta);
+
+if ($preciohora == -1) {
+  if ($tipo == "MOTO") {
+    $preciohora = 1000;
+  }
+  else {
+    $preciohora = 2000;
+  }
+}
+
 if ($numfilas ==  '0')
 {
   ?>
@@ -59,6 +68,7 @@ if ($numfilas ==  '0')
     </form>
   </center>
   <?php
+  header("refresh: 10; url=../ConsultaPlaca.php");
 }
 else
 {
@@ -92,6 +102,7 @@ if ($estado == "f")
         <input type="button" value="Imprimir" onClick="actionForm(this.form.id, 'facturaent.php', '_blank'); return false;" />
     </form>
   <?php
+  header("refresh: 10; url=../ConsultaPlaca.php");
     }
 else {
   if ($estado == "t")
@@ -125,7 +136,7 @@ else {
       <input type="button" value="Imprimir" onClick="actionForm(this.form.id, 'facturasal.php', '_blank'); return false;" />
     </form>
 <?php
-
+  header("refresh: 10; url=../ConsultaPlaca.php");
   }
 }
 ?>

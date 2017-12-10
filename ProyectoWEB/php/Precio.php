@@ -1,5 +1,5 @@
 <?php
-function price($fechaing, $cascos, $horaing, $preciohorabase = -1, $tipo, $daily) #revisar el parametro por defecto
+function price($fechaing, $cascos, $horaing, $preciohorabase, $tipo, $daily) #revisar el parametro por defecto
 {
   error_reporting(E_ALL);
   ini_set('display_errors', '1');
@@ -8,22 +8,13 @@ function price($fechaing, $cascos, $horaing, $preciohorabase = -1, $tipo, $daily
   $año = date('Y');
   $Month = date('m');
   $Day = date('d');
-  $difminutos = date("i", time()) - date("i", strtotime($horaing))
+  $difminutos = date("i", time()) - date("i", strtotime($horaing));
 
   if ($tipo == "MOTO") {
     $preciodia = 2500;
   }
   else {
     $preciodia = 10000;
-  }
-
-  if ($preciohorabase == -1) {
-    if ($tipo == "MOTO") {
-      $preciohorabase = 1000;
-    }
-    else {
-      $preciohorabase = 2000;
-    }
   }
 
     if ($Month == date("m", strtotime($fechaing)))
@@ -52,7 +43,7 @@ function price($fechaing, $cascos, $horaing, $preciohorabase = -1, $tipo, $daily
               {
                 #se creo la variable difminutos arriba
                     if ($difminutos >= 15) {
-                      $Tpago = $preciohorabase + ($cascos*200)
+                      $Tpago = $preciohorabase + ($cascos*200);
                     }
                     else {
                       $Tpago= 0;
