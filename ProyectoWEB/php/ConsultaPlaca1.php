@@ -67,8 +67,10 @@ if ($numfilas ==  '0')
       <input type="button" value="Imprimir" onClick="actionForm(this.form.id, 'facturaent.php', '_blank'); return false;" />
     </form>
   </center>
-  <?php
-  header("refresh: 10; url=../ConsultaPlaca.php");
+ 
+
+<?php
+ header("refresh: 10; url=../ConsultaPlaca.php");
 }
 else
 {
@@ -101,8 +103,9 @@ if ($estado == "f")
         <!--  <input type="button" value="Registrar" onClick="actionForm(this.form.id, 'updatemoto.php', '_parent'); return false;" /> -->
         <input type="button" value="Imprimir" onClick="actionForm(this.form.id, 'facturaent.php', '_blank'); return false;" />
     </form>
+    
   <?php
-  header("refresh: 10; url=../ConsultaPlaca.php");
+ header("refresh: 10; url=../ConsultaPlaca.php");
     }
 else {
   if ($estado == "t")
@@ -140,5 +143,6 @@ else {
   }
 }
 ?>
+<a href="../ConsultaPlaca.php"><img src="../images/back.png" height="60" width="60"></a>
  </body>
  </html>

@@ -12,11 +12,12 @@ session_start();
 if ($_SESSION['user']!="root") {
 
  ?>
+ <center>
  <body>
 
-     <div class="">
-       <p>PARQUEADERO FORERO PAEZ</p>
-       <form action="php/login.php" method="POST">
+     <div class="form1">
+      <center> <p>PARQUEADERO FORERO PAEZ</p></center>
+       <form action="php/login.php" method="POST" id="form1">
          <label for="">Iniciar Sesión</label></br>
 
             <input type="text" name="id" placeholder="ID o Login"></br>
@@ -31,7 +32,11 @@ if ($_SESSION['user']!="root") {
 
        </form>
      </div>
-
+</center>
+ <div style="text-align:left;padding:1em 0;"> 
+      	<h3><a style="text-decoration:none;" href="https://www.zeitverschiebung.net/es/city/3688465">
+      		<iframe src="https://www.zeitverschiebung.net/clock-widget-iframe-v2?language=es&size=medium&timezone=America%2FBogota" width="100%" height="115" frameborder="0" seamless></iframe> 
+      </div>
  </body>
 <?php
 }

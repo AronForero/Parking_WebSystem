@@ -1,7 +1,7 @@
 <?PHP
 function Conexion()
 {
-  $conn = pg_connect("host=localhost user=postgres port=5432 dbname=parqueadero password=123456");
+  $conn = pg_connect("host=localhost user=laura port=5432 dbname=Parqueadero password=12345");
   return $conn;
 }
 ?>

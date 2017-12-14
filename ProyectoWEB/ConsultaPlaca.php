@@ -1,6 +1,6 @@
 <?php session_start();
 if ($_SESSION['user']!=null) {
-  include("php/notify.php");
+  
  ?>
 <html>
   <head>
@@ -20,8 +20,9 @@ if ($_SESSION['user']!=null) {
   </head>
   <body>
 
-
+<center>
   <div id="">
+  	<center> <p>PARQUEADERO FORERO PAEZ</p></center>
       <form id="consulta" action="php/ConsultaPlaca1.php" method="POST" onsubmit="return validacion()" name="formulario1">
 
              <label for="">Consulta placa</label></br>
@@ -29,12 +30,12 @@ if ($_SESSION['user']!=null) {
              &nbsp;&nbsp;Precio/Hora:<input type="number" name="preciohora" value = -1></br>
              &nbsp;&nbsp;&nbsp;&nbsp;Pago Diario: &nbsp;&nbsp;SI<input type="radio" name="diario" value="SI"> NO<input type="radio" name="diario" value="NO" checked></br>
              &nbsp;&nbsp;&nbsp;&nbsp;Tipo Vehiculo: &nbsp;&nbsp;Motocicleta<input type="radio" name="tipo" value="MOTO" checked=""> Carro<input type="radio" name="tipo" value="CARRO"></br>
-            <input type="submit" name="" value="Consultar" ></br>
+            <input type="submit" name="enviar" value="Consultar" ></br>
 
 
       </form>
     </div>
-
+</center>
 
 
      <div class="">
@@ -47,5 +48,6 @@ if ($_SESSION['user']!=null) {
 }
 else {
   echo "<H1>Por Favor Inicie Sesion</H1> ";
+  header("refresh: 5; url=../ProyectoWEB/");
 }
  ?>
