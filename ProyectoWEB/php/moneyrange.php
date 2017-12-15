@@ -89,12 +89,12 @@
     if ($Mes == $Month) {
       for ($i=0; $i < ($diasr+1); $i++) {
         $date = $Año."-".$Mes."-".($Dia+$i);
-        $consulta = "select * from backup where fechas='$date'";
+        $consulta = "select * from log where fechas='$date'";
         $result = pg_query($con, $consulta);
         $numerofilas = pg_numrows($result);
         if ($numerofilas ==0)
         {
-          echo "__________________________________________________________________";
+          echo "<script type=\"text/javascript\">alert('No hay datos en la fecha indicada.'); window.location='consultacaja.php';</script>";
         }
         else
         {
@@ -152,12 +152,12 @@
     else {
       while ($Dia <= $indice) {
           $date = $Año."-".$Mes."-".($Dia);
-          $consulta = "select * from backup where fechas='$date'";
+          $consulta = "select * from log where fechas='$date'";
           $result = pg_query($con, $consulta);
           $numerofilas = pg_numrows($result);
           if ($numerofilas ==0)
           {
-            echo "__________________________________________________________________";
+            echo "No se registran datos para la fecha indicada.";
           }
           else
           {
@@ -214,12 +214,12 @@
       } #FIN DEL WHILE
       for ($i=0; $i<$Day; $i++) {
         $date = $Año."-".$Month."-".($Day+$i);
-        $consulta = "select * from backup where fechas='$date'";
+        $consulta = "select * from log where fechas='$date'";
         $result = pg_query($con, $consulta);
         $numerofilas = pg_numrows($result);
         if ($numerofilas ==0)
         {
-          echo "__________________________________________________________________";
+          echo "No se registran datos para la fecha indicada.";
         }
         else
         {
