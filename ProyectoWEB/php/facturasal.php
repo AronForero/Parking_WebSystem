@@ -42,7 +42,7 @@ $pdf->SetFont('Courier', 'B', 11);
 $pdf->Cell(10,5,"",0);
 $pdf->Cell(39,5,"Factura No:",0);
 $pdf->SetFont('Courier', '', 11);
-$pdf->Cell(32,5,$numfact,0);
+$pdf->Cell(32,5,"0000001",0);
 $pdf->Ln(7);
 $pdf->Cell(3,5,"",0);
 $pdf->SetFont('Courier', 'B', 11);

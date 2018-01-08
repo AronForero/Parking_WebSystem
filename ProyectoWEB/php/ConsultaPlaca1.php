@@ -13,6 +13,7 @@
 </script>
 </head>
 <body >
+<img id="FONDO2" src="../images/FONDO2.jpg" alt="background image"/>
 <?php
 session_start();
 error_reporting(E_ALL);
@@ -24,10 +25,8 @@ date_default_timezone_set('America/Bogota');
 
 $placa = $_POST["placa"];
 $preciohora = $_POST["preciohora"];
-$mediodia = $_POST["medio"];
 $diario = $_POST["diario"];
 $tipo = $_POST["tipo"];
-$tipovehiculo = $_POST["tipo"];
 $con = Conexion();
 $consulta = "select * from vehiculo where placa='$placa'";
 $ejecuta= pg_query($con, $consulta);
@@ -38,12 +37,7 @@ if ($preciohora == -1) {
     $preciohora = 1000;
   }
   else {
-    if ($tipo == "CARRO") {
-      $preciohora = 2300;
-    }
-    else{
-      $preciohora = 3000;
-    }
+    $preciohora = 2000;
   }
 }
 
@@ -51,15 +45,8 @@ if ($tipo == "MOTO") {
   $tipo = 1;
   }
   else {
-    if ($tipo == "CARRO") {
-      $tipo = 2;  
-    }
-    else{
-      $tipo = 3;
-    }
+    $tipo = 2;
   }
-
-
 
 if ($numfilas ==  '0')
 {
@@ -67,8 +54,8 @@ if ($numfilas ==  '0')
   <center>
     <h1>No existe este vehiculo en la Base de Datos</h1>
     <form action="" id="form1" method="post" onsubmit="facturaent.js">
-     <label for="">Insertar Motocicleta</label></br>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Placa:<input type="text" id="placa" name="placa2" value="<?php echo $placa; ?>"></br>
+      <center> &ensp;&ensp;&ensp;&ensp;<b>INGRESO</b></center></br></br>
+      <b><font size = 7> &ensp; &ensp;Placa:</b></font><input type="text" id="placa" name="placa2" maxlength="6" placeholder="Placa" height="100" size="10" style="height:45"  value="<?php echo $placa; ?>"></br>
       <input type="hidden" name="estado" value="t" >
       <input type="hidden" name="horas" value="<?php echo date("H:i:s", time()); ?>" >
       <input type="hidden" name="pago" value="<?php echo $preciohora ?>" >
@@ -79,19 +66,20 @@ if ($numfilas ==  '0')
       <!------------------------------------------------------------------------>
       <input type="hidden" name="onlyone" value="1">
       <!------------------------------------------------------------------------>
-      &nbsp;&nbsp;&nbsp;Fecha Ingreso: <input type="text" id="fechai" name="fechai" value="<?php echo date('Y-m-d'); ?>"></br>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hora Ingreso: <input type="text" id="horai" name="horai" value="<?php echo date("H:i:s", time()); ?>"></br>
+      &ensp;&ensp;&ensp;&ensp;Fecha Ingreso: <input type="text" id="fechai" name="fechai" value="<?php echo date('Y-m-d'); ?>"></br>
+      &ensp;&ensp;Hora Ingreso: <input type="text" id="horai" name="horai" value="<?php echo date("H:i:s", time()); ?>"></br></br></br></br></br>
       <input type="hidden" name="diario2" value="<?php echo $diario ?>"></br>
 
       <!--Botones Para imprimir o guardar en la base, llaman a la funcion en JS definida arriba en el head, una abre una pestaña nueva y la otra carga en la misma pagina -->
       <!--<input type="button" value="Registrar" onClick="actionForm(this.form.id, 'IngresaPlaca.php', '_parent'); return false;" /> -->
-      <input type="button" value="Imprimir" onClick="actionForm(this.form.id, 'facturaent.php', '_blank'); return false;" />
+
+      <center><input type="image" value="Imprimir" src="../images/Imprimir.png" height="77" width="243" onClick="actionForm(this.form.id, 'facturaent.php', '_blank'); return false;"/></center>
     </form>
   </center>
 
 
 <?php
- header("refresh: 10; url=../ConsultaPlaca.php");
+ /*header("refresh: 10; url=../ConsultaPlaca.php");DESCOMENTARIARRRRRRRRRR!*/ 
 }
 else
 {
@@ -104,9 +92,14 @@ else
 if ($estado == "f")
     {
 ?>
-    <form id="form2" method="post">
-       <label for="">Registro de Vehiculo 1</label></br>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Placa:<input type="text" name="placa2" value="<?php echo $placa; ?>" /></br>
+    <form id="formu2" method="post">
+      <!-- <label for="">Registro de Vehiculo 1</label></br>-->
+       <center> &ensp;&ensp;&ensp;&ensp;<b>INGRESO</b></center></br>
+      <b><font size = 7> &ensp;&ensp;&ensp;&ensp;&ensp;Placa:</b></font><input type="text" id="placa" name="placa2" maxlength="6" placeholder="Placa" height="100" size="10" style="height:45"  value="<?php echo $placa; ?>"></br></br>
+
+
+
+
         <input type="hidden" name="estado" value="t">
         <input type="hidden" name="horas" value="<?php echo date("H:i:s", time()); ?>">
         <input type="hidden" name="pago" value="<?php echo $preciohora ?>">
@@ -118,15 +111,16 @@ if ($estado == "f")
         <!------------------------------------------------------------------------>
         <input type="hidden" name="onlyone" value="0"> <!--este campo se utiliza para saber si es la primera vez que ingresa la motocicleta "hacer update o insert"-->
         <!------------------------------------------------------------------------>
-        &nbsp;&nbsp;&nbsp;Fecha Ingreso: <input type="date" name="fechai" value="<?php echo date('Y-m-d'); ?>" /></br>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hora Ingreso: <input type="text" name="horai" value="<?php echo date("H:i:s", time()); ?>"></br>
+          &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;Fecha Ingreso: <input type="date" name="fechai" value="<?php echo date('Y-m-d'); ?>" /></br>
+          &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;Hora Ingreso: <input type="text" name="horai" value="<?php echo date("H:i:s", time()); ?>"></br></br></br></br></br>
 
         <!--  <input type="button" value="Registrar" onClick="actionForm(this.form.id, 'updatemoto.php', '_parent'); return false;" /> -->
-        <input type="button" value="Imprimir" onClick="actionForm(this.form.id, 'facturaent.php', '_blank'); return false;" />
+        
+        <center><input type="image" src="../images/Imprimir.png" height="77" width="243" onClick="actionForm(this.form.id, 'facturasal.php', '_blank'); return false;"/></center>
     </form>
 
   <?php
- header("refresh: 10; url=../ConsultaPlaca.php");
+ /*header("refresh: 10; url=../ConsultaPlaca.php");DESCOMENTARIARRRRRRRRRR!*/ 
     }
 else {
   if ($estado == "t")
@@ -138,7 +132,7 @@ else {
     $preciohorabase = $fila["4"];
     #se elimino variable stu, que indicaba si era un estudiante
 
-          $Tpago = price($fechaing, $cascos, $horaing, $preciohorabase, $tipovehiculo, $daily);
+          $Tpago = price($fechaing, $cascos, $horaing, $preciohorabase, $tipo, $daily);
 
         #se elimino la parte del dia, se tomara en cuenta en la funcion price
    } //Fin del programa para calcular el precio
@@ -149,68 +143,35 @@ else {
    else{
     $horaingreso = substr($horaing, 0, 5)." am";
    }
-   
    $fechaingreso = substr($fechaing, 8, 2)."-".substr($fechaing, 5, 2)."-".substr($fechaing, 0, 4);
-
-   if ($_SESSION['fact']==null) #Administro el numero consecutivo de la factura
-   {
-     $_SESSION['fact']=1;
-   }
-   else{
-     if ($_SESSION['fact']==1000000) {
-       $_SESSION['fact'] = 1;
-     }
-     else
-     {
-      $_SESSION['fact']=$_SESSION['fact']+1;
-     }
-   }
-   $long = strlen($_SESSION['fact']);
-   $loop = 7-$long;
-   if ($loop > 1) {
-    $cadena = "0";
-     for ($i=1; $i < $loop; $i++) { 
-       $cadena = $cadena."0";
-     }
-   }
-   else{
-    if ($loop==1) {
-      $cadena="0";
-    }
-    else{
-      if ($loop<1) {
-        $cadena="";
-      }
-    }
-   }
-   $numfactura = $cadena.$_SESSION['fact'];
-     
-
-
     ?>
+    <center>
     <form id="form3" method="post">
-     <label for="">Registro de Vehiculo</label></br>
-      &nbsp;&nbsp;&nbsp;&nbsp;Placa: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="placa2" value="<?php echo $placa; ?>"></br>
-      &nbsp;&nbsp;&nbsp;&nbsp;Hora de Entrada: &nbsp; <input type="text" name="horai" value="<?php echo $fila["2"]; ?>"></br>
+    <!-- <label for="">Registro de Vehiculo</label></br>-->
+     <b><font size = 7>Placa:&ensp;<b><input id=placa type="text" name="placa2" maxlength="6" placeholder="Placa" height="100" size="6"  style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" value="<?php echo $placa; ?>"></br></br></font>
+     Hora de Entrada: <input type="text" name="horai" value="<?php echo $fila["2"]; ?>"></br></br>
       <input type="hidden" name="horaing" value="<?php echo $horaingreso; ?>">
-      &nbsp;&nbsp;&nbsp;&nbsp;Hora de Salida: &nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="horas" value="<?php echo date("H:i:s", time()); ?>"></br>
-      &nbsp;&nbsp;&nbsp;&nbsp;Fecha de Entrada: <input type="date" name="fechai" value="<?php echo $fila["6"] ?>"></br>
+     &ensp;&ensp;Hora de Salida: <input type="text" name="horas" value="<?php echo date("H:i:s", time()); ?>"></br></br>
+     &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;Fecha de Entrada: <input type="date" name="fechai" value="<?php echo $fila["6"] ?>"></br></br>
       <input type="hidden" name="fechaing" value="<?php echo $fechaingreso ?>">
-      &nbsp;&nbsp;&nbsp;&nbsp;Fecha de Salida: &nbsp;&nbsp;<input type="date" name="fechas" value="<?php echo date('Y-m-d'); ?>"></br>
-      &nbsp;&nbsp;&nbsp;&nbsp;Total Pagar: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="number" name="pago" value="<?php echo $Tpago ?>"></br>
-      <input type="hidden" name="numfact" value="<?php echo $numfactura ?>">
+     &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;Fecha de Salida: <input type="date" name="fechas" value="<?php echo date('Y-m-d'); ?>"></br></br>
+     &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;Total Pagar: <input type="number" name="pago" value="<?php echo $Tpago ?>"></br></br></br></br>
       <input type="hidden" name="cascos" value="0">
       <input type="hidden" name="estado" value="f">
       <input type="hidden" name="diario2" value="NO">
 
       <!--<input type="button" value="Registrar" onClick="actionForm(this.form.id, 'updatemoto.php', '_parent'); return false;" />-->
-      <input type="button" value="Imprimir" onClick="actionForm(this.form.id, 'facturasal.php', '_blank'); return false;" />
+      
+       <center><input type="image" src="../images/Imprimir.png" height="77" width="243" onClick="actionForm(this.form.id, 'facturasal.php', '_blank'); return false;"/></center>
     </form>
+    </center>
 <?php
-  header("refresh: 10; url=../ConsultaPlaca.php");
+ /*header("refresh: 10; url=../ConsultaPlaca.php");DESCOMENTARIARRRRRRRRRR!*/ 
   }
 }
 ?>
-<a href="../ConsultaPlaca.php"><img src="../images/back.png" height="60" width="60"></a>
+<div id="atras">
+<a href="../ConsultaPlaca.php"><img src="../images/back.png" height="60" width="60" ></a>
+</div>
  </body>
  </html>

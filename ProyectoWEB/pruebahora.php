@@ -7,8 +7,4 @@ echo $fecha;
 echo "             \n";
 echo "Arreglada:";
 echo substr($fecha, 8, 2)."-".substr($fecha, 5, 2)."-".substr($fecha, 0, 4);
-echo "</br>";
-echo "</br>";
-echo "</br>";
-echo strlen(1234);
 ?>

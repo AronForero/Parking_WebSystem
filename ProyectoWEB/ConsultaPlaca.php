@@ -6,8 +6,8 @@ if ($_SESSION['user']!=null) {
   <head>
    <link rel="shortcut icon" href="images/tire-icon.png">
     <meta charset="utf-8">
-    <link rel="stylesheet" type="text/css" href="css/loginSS.css" media="screen"/>
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300i" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="css/loginSS.css" media="screen"/>
+   
     <title>Ingreso de Motocicletas</title>
     <style media="screen">
     input[type="number"]::-webkit-inner-spin-button,
@@ -19,40 +19,51 @@ if ($_SESSION['user']!=null) {
     <script type="text/javascript" src="php/validacion.js"></script>
   </head>
   <body>
+<img id="fondo" src="images/fondo.jpg" alt="background image"/>
 
-<center>
-  <div id="">
-  	<center> <p>PARQUEADERO FORERO PAEZ</p></center>
+  
+  
       <form id="consulta" action="php/ConsultaPlaca1.php" method="POST" onsubmit="return validacion()" name="formulario1">
 
-             <label for="">Consulta placa</label></br>
-             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Placa:&nbsp;&nbsp;&nbsp;<input type="text" name="placa" id="placa" placeholder="Placa">
-             <input type="hidden" name="preciohora" value = -1></br>
-             Pago Medio Dia: SI <input type="radio" name="medio"> NO <input type="radio" name="medio" checked=""></br>
-             &nbsp;&nbsp;&nbsp;&nbsp;Pago Diario: &nbsp;&nbsp;SI<input type="radio" name="diario" value="SI"> NO<input type="radio" name="diario" value="NO" checked></br>
-             &nbsp;&nbsp;&nbsp;&nbsp;Tipo Vehiculo: &nbsp;&nbsp;Motocicleta<input type="radio" name="tipo" id="tipo" value="MOTO"> Carro<input type="radio" name="tipo" id="tipo" value="CARRO" checked=""> Camioneta <input type="radio" name="tipo"></br>
-            <input type="submit" name="enviar" value="Consultar" ></br>
+        
+             &ensp;    &ensp; &ensp; &ensp;&ensp;&ensp;&ensp;<b><font size = 6>Placa: </font>&ensp;</b><input type="text" name="placa" id="placa" maxlength="6" placeholder="Placa" height="100" size="10" style="height:45"  style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();"></br>
 
+             <input type="hidden" name="preciohora" value = -1></br>
+         
+           &ensp;&ensp; &ensp; &ensp; <font size = 4>Pago Medio Dia:&ensp;&ensp;&ensp;SI <input type="radio" name="medio"> NO <input type="radio" name="medio" checked=""></br></br></font>
+         
+            &ensp;&ensp;&ensp;<font size = 4>Pago Diario: &ensp;&ensp; SI<input type="radio" name="diario" value="SI"> NO<input type="radio" name="diario" value="NO" checked></br></br></font>
+         
+           <font size = 4> Tipo de Vehiculo: <select name="tipo" id="tipo">
+               <option value="MOTO"  id="tipo">Motocicleta</option>
+               <option value="CARRO"  id="tipo">Carro</option>
+               <option value="CAMIONETA">Camioneta</option>
+             </select></br></br></font>
+          
+           <center><input type="image" src="images/Consultar.png" height="77" width="243"/></center>
+
+</div>
 
       </form>
-    </div>
-</center>
+    
 
 
-     <div class="">
-      <input type="button" style="position: absolute; top: 200; left: 400;" value="BALANCE DIARIO" class="myButton" onclick="window.open('php/consultacaja.php','nuevaVentana','width=1000, height=670, top=0, left=0')" />
-      <a href="php/close.php" class="myButton" style="position: absolute; top: 300; left: 400;">CERRAR SESION</a>
+
+     <div id="balance">
+      <input type="image" src="images/balancediario.png" height="49" width="255" onclick="window.open('php/consultacaja.php','nuevaVentana','width=1000, height=670, top=0, left=0')" /> <!--click balance -->
+      
       </div>
+
+      <div id="cerrar">
+        <a href="php/close.php"><img src="images/cerrar-sesión.png" height="71" width="350" top="0" right="0"></a><!--click cerrar sesión -->
+      </div>
+
   </body>
 </html>
 <?php
 }
 else {
   echo "<H1>Por Favor Inicie Sesion</H1> ";
-  echo "</br>";
-  echo "</br>";
-  echo "</br>";
-  echo "<h2>REDIRECCIONANDO AL INICIO...</h2>";
-  header("refresh: 4; url=index.php");
+  header("refresh: 5; url=../ProyectoWEB/");
 }
  ?>

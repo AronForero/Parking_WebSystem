@@ -62,18 +62,24 @@ th {
         include("Connection.php");
         date_default_timezone_set('America/Bogota');
         $date = date('Y-m-d');
-        $consulta1 = "select sum(pago) from log where fechas='$date' AND estado='f'" ; //Agregar consulta para saber cuantos vehiculos entraron y cuantos de cada tipo
-        $consulta2 = "select sum(pago) from log where fechas='$date' AND tipo='CARRO' AND estado='f'";
+        $consulta1 = "select sum(pago) from log where fechas='$date' AND estado='f'" ; //suma vehiculos que salieron
+        $consulta2 = "select sum(pago) from log where fechas='$date' AND tipo='2' AND estado='f'"; //suma carros que salieron
 
-        $consulta3 = "select sum(pago) from log where fechas='$date' AND tipo='MOTO' AND estado='f'";
+        $consulta3 = "select sum(pago) from log where fechas='$date' AND tipo='1' AND estado='f'"; //suma motos que salieron
 
-       	$consulta4 = "select count(*) from log where fechas='$date' AND tipo='MOTO' AND estado='t'";
+        $consulta8 = "select sum(pago) from log where fechas='$date' AND tipo='3' AND estado='f'"; //suma camionetas que salieron
 
-        $consulta5 = "select count(*) from log where fechas='$date' AND tipo='CARRO' AND estado='t'";
+       	$consulta4 = "select count(*) from log where fechas='$date' AND tipo='1' AND estado='t'"; //cuenta motos que entraron
 
-        $consulta6="select count(*) from log where fechas='$date' AND tipo='MOTO' AND estado='f'";
+        $consulta5 = "select count(*) from log where fechas='$date' AND tipo='2' AND estado='t'";//cuenta carros que entraron
 
-        $consulta7="select count(*) from log where fechas='$date' AND tipo='CARRO' AND estado='f'";
+        $consulta9 = "select count(*) from log where fechas='$date' AND tipo='3' AND estado='t'";//cuenta camionetas que entraron
+
+        $consulta6="select count(*) from log where fechas='$date' AND tipo='1' AND estado='f'";//cuenta motos que salieron
+
+        $consulta7="select count(*) from log where fechas='$date' AND tipo='2' AND estado='f'";//cuenta carros que salieron
+
+        $consulta10 = "select count(*) from log where fechas='$date' AND tipo='3' AND estado='f'";//cuenta camionetas que salieron
 
 
 
@@ -87,14 +93,21 @@ th {
         $result5=pg_query($con,$consulta5);
         $result6=pg_query($con,$consulta6);
         $result7=pg_query($con,$consulta7);
+        $result8=pg_query($con,$consulta8);
+        $result9=pg_query($con,$consulta9);
+        $result10=pg_query($con,$consulta10);
 
         $filatotal = pg_fetch_array($result);
         $filacarro = pg_fetch_array($result2); 
         $filamoto = pg_fetch_array($result3); 
+        $filacam = pg_fetch_array($result8); 
         $entradamoto =pg_fetch_array($result4);
         $entradacarro =pg_fetch_array($result5);
+        $entradacam =pg_fetch_array($result9); 
         $salidamoto =pg_fetch_array($result6);
         $salidacarro =pg_fetch_array($result7);
+        $salidacam =pg_fetch_array($result10);
+
 
         ?>
      <center> 
@@ -117,6 +130,12 @@ th {
 			    <TD><?php echo $salidamoto["0"]; ?></TD>
 			    <TD>$<?php echo $filamoto["0"]; ?></TD>
 			  </TR>
+        <TR>
+          <th>CAMIONETAS</th> 
+          <TD><?php echo $entradacam["0"]; ?></TD> 
+          <TD><?php echo $salidacam["0"]; ?></TD>
+          <TD>$<?php echo $filacam["0"]; ?></TD>
+        </TR>
 			  <TR>
 			    <TD colspan=4 text>TOTAL DIARIO  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$<?php echo $filatotal["0"]; ?></TD> 
 
