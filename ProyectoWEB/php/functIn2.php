@@ -1,5 +1,5 @@
 <?php
-function factent2($placa2, $estado, $horai, $horas, $pago, $cascos, $fechai, $fechas)
+function factent2($placa2, $estado, $horai, $horas, $pago, $cascos, $fechai, $fechas, $diario2, $tipo)
 {
   error_reporting(E_ALL);
   ini_set('display_errors', '1');

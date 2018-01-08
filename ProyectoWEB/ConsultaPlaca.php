@@ -1,6 +1,6 @@
 <?php session_start();
 if ($_SESSION['user']!=null) {
-  
+
  ?>
 <html>
   <head>
@@ -27,9 +27,10 @@ if ($_SESSION['user']!=null) {
 
              <label for="">Consulta placa</label></br>
              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Placa:&nbsp;&nbsp;&nbsp;<input type="text" name="placa" id="placa" placeholder="Placa">
-             &nbsp;&nbsp;Precio/Hora:<input type="number" name="preciohora" value = -1></br>
+             <input type="hidden" name="preciohora" value = -1></br>
+             Pago Medio Dia: SI <input type="radio" name="medio"> NO <input type="radio" name="medio" checked=""></br>
              &nbsp;&nbsp;&nbsp;&nbsp;Pago Diario: &nbsp;&nbsp;SI<input type="radio" name="diario" value="SI"> NO<input type="radio" name="diario" value="NO" checked></br>
-             &nbsp;&nbsp;&nbsp;&nbsp;Tipo Vehiculo: &nbsp;&nbsp;Motocicleta<input type="radio" name="tipo" value="MOTO" checked=""> Carro<input type="radio" name="tipo" value="CARRO"></br>
+             &nbsp;&nbsp;&nbsp;&nbsp;Tipo Vehiculo: &nbsp;&nbsp;Motocicleta<input type="radio" name="tipo" id="tipo" value="MOTO"> Carro<input type="radio" name="tipo" id="tipo" value="CARRO" checked=""> Camioneta <input type="radio" name="tipo"></br>
             <input type="submit" name="enviar" value="Consultar" ></br>
 
 
@@ -39,8 +40,8 @@ if ($_SESSION['user']!=null) {
 
 
      <div class="">
-      <input type="button" style="position: absolute; top: 400; left: 200;" value="BALANCE DIARIO" class="myButton" onclick="window.open('php/consultacaja.php','nuevaVentana','width=1000, height=670, top=0, left=0')" />
-      <a href="php/close.php" class="myButton" style="position: absolute; top: 0; left: 200;">CERRAR SESION</a>
+      <input type="button" style="position: absolute; top: 200; left: 400;" value="BALANCE DIARIO" class="myButton" onclick="window.open('php/consultacaja.php','nuevaVentana','width=1000, height=670, top=0, left=0')" />
+      <a href="php/close.php" class="myButton" style="position: absolute; top: 300; left: 400;">CERRAR SESION</a>
       </div>
   </body>
 </html>
@@ -48,6 +49,10 @@ if ($_SESSION['user']!=null) {
 }
 else {
   echo "<H1>Por Favor Inicie Sesion</H1> ";
-  header("refresh: 5; url=../ProyectoWEB/");
+  echo "</br>";
+  echo "</br>";
+  echo "</br>";
+  echo "<h2>REDIRECCIONANDO AL INICIO...</h2>";
+  header("refresh: 4; url=index.php");
 }
  ?>

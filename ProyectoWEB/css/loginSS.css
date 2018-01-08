@@ -1,7 +1,14 @@
+@font-face {
+    font-family: "Futura";
+    font-style: normal;
+    font-weight: normal;
+    src: local("?"), url("../fonts/lightitalic.eot") format("eot"), url("../fonts/lightitalic.ttf") format("truetype");
+}
+
 body
 {
     background-image: url("../images/fondo.jpg");
-    background-size: 100% 100%;
+    background-size: 100% 170%;
     margin:0;
     
 }
@@ -9,13 +16,13 @@ p{
 
 	font-size: 70px;
 	text-align: left;
-	margin-left: 375px;
+	margin-left: 480px;
 	margin-top: 25px;
 	 background: -webkit-linear-gradient(#6B76E1,#101017);
  	 -webkit-background-clip: text;
   	-webkit-text-fill-color: transparent;
   	color: tomato;
-	font-family: 'Open Sans Condensed', sans-serif;
+	font-family: Futura;
 	padding: 1px;
 	font-weight: bold;
 

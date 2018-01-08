@@ -8,13 +8,25 @@ function price($fechaing, $cascos, $horaing, $preciohorabase, $tipo, $daily) #re
   $año = date('Y');
   $Month = date('m');
   $Day = date('d');
-  $difminutos = date("i", time()) - date("i", strtotime($horaing));
-
-  if ($tipo == "MOTO") {
-    $preciodia = 2500;
+  if (date("i", time()) < date("i", strtotime($horaing))) {
+    $difminutos = date("i", time())+(60-date("i", strtotime($horaing)));
   }
   else {
-    $preciodia = 10000;
+    $difminutos = date("i", time()) - date("i", strtotime($horaing));
+  }
+
+  if ($tipo == "MOTO") {
+    $preciodia = 3000;
+  }
+  else {
+    if ($tipo == "CARRO") {
+      $preciodia = 10000;
+      $mediodia = 5000;
+    }
+    else{
+      $preciodia = 12000;
+      $mediodia = 7000;
+    }
   }
 
     if ($Month == date("m", strtotime($fechaing)))
@@ -42,15 +54,16 @@ function price($fechaing, $cascos, $horaing, $preciohorabase, $tipo, $daily) #re
               if ($difhoras == 0)
               {
                 #se creo la variable difminutos arriba
-                    if ($difminutos >= 15) {
-                      $Tpago = $preciohorabase + ($cascos*200);
-                    }
-                    else {
-                      $Tpago= 0;
-                    }
+                $Tpago = $preciohorabase + ($cascos*200);
               }
               else {
                   $Tpago = ($difhoras*$preciohorabase)+($cascos*200);
+                  if ($difminutos >= 15) {
+                      $Tpago = ($cascos*200) + $difhoras*$preciohorabase;
+                  }
+                  else {
+                    $Tpago = ($cascos*200) + $difhoras*$preciohorabase - $preciohorabase;
+                  }
               }
             }
 

@@ -33,10 +33,10 @@ if ($_SESSION['user']!="root") {
        </form>
      </div>
 </center>
- <div style="text-align:left;padding:1em 0;"> 
+ <!--<div style="text-align:left;padding:1em 0;"> 
       	<h3><a style="text-decoration:none;" href="https://www.zeitverschiebung.net/es/city/3688465">
       		<iframe src="https://www.zeitverschiebung.net/clock-widget-iframe-v2?language=es&size=medium&timezone=America%2FBogota" width="100%" height="115" frameborder="0" seamless></iframe> 
-      </div>
+      </div>-->
  </body>
 <?php
 }
