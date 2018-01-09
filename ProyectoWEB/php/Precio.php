@@ -16,10 +16,17 @@ function price($fechaing, $cascos, $horaing, $preciohorabase, $tipo, $daily) #re
   }
 
   if ($tipo == "MOTO") {
-    $preciodia = 2500;
+    $preciodia = 3000;
   }
   else {
-    $preciodia = 10000;
+    if ($tipo == "CARRO") {
+       $preciodia = 10000;
+       $mediodia = 5000;
+     }
+     else{
+       $preciodia = 12000;
+       $mediodia = 7000;
+     }
   }
 
     if ($Month == date("m", strtotime($fechaing)))
