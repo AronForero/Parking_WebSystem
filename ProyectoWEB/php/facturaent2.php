@@ -2,8 +2,7 @@
 <?php
 
 require("pdfjs.php");
-require("functIn.php");
-require("functIn2.php");
+require("functIn3.php");
 date_default_timezone_set('America/Bogota');
 extract($_POST);
 
@@ -66,17 +65,9 @@ $pdf->Cell(22,5,"",0);
 $pdf->Cell(39,5,"Bienvenido!",0);
 
 $pdf->Output("factura-empresa.pdf","I");
+$diasr = 1;
+factent3($placa2, $estado, $horai, $horas, $fechai, $fechas, $diasr);
 
-
-if ($onlyone == "1") {
-
-    factent($placa2, $estado, $horai, $horas, $pago, $cascos, $fechai, $fechas, $diario2, $tipo, $mediodia);
-    #se agrego la variable tipo como parametro
-}
-elseif ($onlyone == "0") {
-    factent2($placa2, $estado, $horai, $horas, $pago, $cascos, $fechai, $fechas, $diario2, $tipo, $mediodia);
-    #se agrego la variable tipo como parametro
-}
 #$pdf->AutoPrint(true);
 #$pdf->Output();
 

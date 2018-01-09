@@ -35,8 +35,8 @@ if ($_SESSION['user']!=null) {
             &ensp;&ensp;&ensp;<font size = 4>Pago Diario: &ensp;&ensp; SI<input type="radio" name="diario" value="SI"> NO<input type="radio" name="diario" value="NO" checked></br></br></font>
          
            <font size = 4> Tipo de Vehiculo: <select name="tipo" id="tipo">
-               <option value="MOTO"  id="tipo">Motocicleta</option>
                <option value="CARRO"  id="tipo">Carro</option>
+               <option value="MOTO"  id="tipo">Motocicleta</option>
                <option value="CAMIONETA">Camioneta</option>
              </select></br></br></font>
           

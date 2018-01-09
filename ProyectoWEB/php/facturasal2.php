@@ -1,9 +1,6 @@
-
 <?php
-
 require("pdfjs.php");
-require("functIn.php");
-require("functIn2.php");
+require("functIn3.php");
 date_default_timezone_set('America/Bogota');
 extract($_POST);
 
@@ -13,8 +10,9 @@ $pdf->SetFont('courier','',8);
 $pdf->SetAutoPageBreak(true, 1);
 $pdf->SetLeftMargin(1);
 $pdf->SetTopMargin(2);
-$pdf->AddPage('P', array(78,78));
+$pdf->AddPage('P', array(84,78));
 
+    /*CABECERA DE LA FACTURA (FIJA)*/
 $pdf->SetFont('Courier', 'B', 16);
 $pdf->Cell(18,4,"",0);
 $pdf->Cell(0,4,"PARQUEADERO",0);
@@ -37,48 +35,60 @@ $pdf->Ln(3);
 $pdf->Cell(24,5,"",0);
 $pdf->Cell(0,5,"Cel. 3212011020",0);
 $pdf->Ln(3);
+    /******************************/
 
-$pdf->Ln(6);
-$pdf->SetFont('Courier', 'B', 13);
-$pdf->Cell(26,5,"",0);
-$pdf->Cell(39,5,"INGRESO",0);
-$pdf->Ln(7);
+$pdf->Ln();
+/*
+$pdf->SetFont('Courier', 'B', 11);
+$pdf->Cell(10,5,"",0);
+$pdf->Cell(39,5,"Factura No:",0);
+$pdf->SetFont('Courier', '', 11);
+$pdf->Cell(32,5,$numfact,0);
+$pdf->Ln(7); */
 $pdf->Cell(3,5,"",0);
 $pdf->SetFont('Courier', 'B', 11);
-$pdf->Cell(39,5,"Placa:",0);
+$pdf->Cell(39,5,"Placa: ",0);
 $pdf->SetFont('Courier', '', 11);
 $pdf->Cell(32,5,$placa2,0);
 $pdf->Ln(5);
 $pdf->Cell(3,5,"",0);
 $pdf->SetFont('Courier', 'B', 11);
-$pdf->Cell(39,5,"Hora:",0);
+$pdf->Cell(39,5,"Hora Entrada: ",0);
+$pdf->SetFont('Courier', '', 11);
+$pdf->Cell(32,5,$horaing,0);
+$pdf->Ln(5);
+$pdf->Cell(3,5,"",0);
+$pdf->SetFont('Courier', 'B', 11);
+$pdf->Cell(39,5,"Hora Salida: ",0);
 $pdf->SetFont('Courier', '', 11);
 $pdf->Cell(32,5,date("h:i a", time()),0);
 $pdf->Ln(5);
 $pdf->Cell(3,5,"",0);
 $pdf->SetFont('Courier', 'B', 11);
-$pdf->Cell(39,5,"Fecha:",0);
+$pdf->Cell(39,5,"Fecha Entrada: ",0);
+$pdf->SetFont('Courier', '', 11);
+$pdf->Cell(32,5,$fechaing,0);
+$pdf->Ln(5);
+$pdf->Cell(3,5,"",0);
+$pdf->SetFont('Courier', 'B', 11);
+$pdf->Cell(39,5,"Fecha Salida: ",0);
 $pdf->SetFont('Courier', '', 11);
 $pdf->Cell(32,5,date('d-m-Y'),0);
+$pdf->Ln(5);
+$pdf->Cell(3,5,"",0);
+$pdf->SetFont('Courier', 'B', 11);
+$pdf->Cell(39,5,"Dias Restantes: ",0);
+$pdf->Cell(32,5,$pago,0);
 $pdf->Ln(10);
-$pdf->SetFont('Courier', 'B', 13);
-$pdf->Cell(22,5,"",0);
-$pdf->Cell(39,5,"Bienvenido!",0);
+$pdf->SetFont('Courier', 'B', 15);
+$pdf->Cell(2,10,"",0);
+$pdf->Cell(31,10,"GRACIAS POR SU VISITA!!",0);
 
-$pdf->Output("factura-empresa.pdf","I");
+$pdf->Output("factura-parking.pdf","I");
 
+factent3($placa2, $estado, $horai, $horas, $fechai, $fechas, $pago);
 
-if ($onlyone == "1") {
-
-    factent($placa2, $estado, $horai, $horas, $pago, $cascos, $fechai, $fechas, $diario2, $tipo, $mediodia);
-    #se agrego la variable tipo como parametro
-}
-elseif ($onlyone == "0") {
-    factent2($placa2, $estado, $horai, $horas, $pago, $cascos, $fechai, $fechas, $diario2, $tipo, $mediodia);
-    #se agrego la variable tipo como parametro
-}
 #$pdf->AutoPrint(true);
 #$pdf->Output();
-
-/*******************************************************************************/
+#header("refresh: 2; url=../ConsultaPlaca.php");
 ?>

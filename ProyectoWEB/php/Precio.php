@@ -1,5 +1,5 @@
 <?php
-function price($fechaing, $cascos, $horaing, $preciohorabase, $tipo, $daily) #revisar el parametro por defecto
+function price($fechaing, $cascos, $horaing, $preciohorabase, $tipo, $daily, $halfday) #revisar el parametro por defecto
 {
   error_reporting(E_ALL);
   ini_set('display_errors', '1');
@@ -50,19 +50,36 @@ function price($fechaing, $cascos, $horaing, $preciohorabase, $tipo, $daily) #re
                   }
                 }
             }
-            else {
-              if ($difhoras == 0)
-              {
-                #se creo la variable difminutos arriba
-                $Tpago = $preciohorabase + ($cascos*200);
-              }
-              else {
-                  $Tpago = ($difhoras*$preciohorabase)+($cascos*200);
+            else 
+            {
+              if ($halfday=="SI") {
+                if ($difhoras <= 7) {
+                  $Tpago = $mediodia + ($cascos*200);
+                }
+                else {
                   if ($difminutos >= 15) {
-                      $Tpago = ($cascos*200) + $difhoras*$preciohorabase;
+                      $Tpago = $mediodia + ($cascos*200) + ($difhoras-7)*$preciohorabase;
                   }
                   else {
-                    $Tpago = ($cascos*200) + $difhoras*$preciohorabase - $preciohorabase;
+                    $Tpago = $mediodia + ($cascos*200) + ($difhoras-7)*$preciohorabase - $preciohorabase;
+                  }
+                }
+              }
+              else
+              {
+                  if ($difhoras == 0)
+                  {
+                    #se creo la variable difminutos arriba
+                    $Tpago = $preciohorabase + ($cascos*200);
+                  }
+                  else {
+                      $Tpago = ($difhoras*$preciohorabase)+($cascos*200);
+                      if ($difminutos >= 15) {
+                          $Tpago = ($cascos*200) + $difhoras*$preciohorabase;
+                      }
+                      else {
+                        $Tpago = ($cascos*200) + $difhoras*$preciohorabase - $preciohorabase;
+                      }
                   }
               }
             }

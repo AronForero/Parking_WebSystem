@@ -86,7 +86,7 @@ $pdf->Cell(31,10,"GRACIAS POR SU VISITA!!",0);
 $pdf->Output("factura-parking.pdf","I");
 
 
-factent2($placa2, $estado, $horai, $horas, $pago, $cascos, $fechai, $fechas, $diario2, $tipo);
+factent2($placa2, $estado, $horai, $horas, $pago, $cascos, $fechai, $fechas, $diario2, $tipo, $mediodia);
           #se agrego la variable tipo como parametro
 #$pdf->AutoPrint(true);
 #$pdf->Output();
