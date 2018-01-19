@@ -27,7 +27,7 @@ $pdf->Cell(17,5,"",0);
 $pdf->Cell(0,5,"Leidy Johana Forero Paez",0);
 $pdf->Ln(3);
 $pdf->Cell(22,5,"",0);
-$pdf->Cell(0,5,"Nit. 1.095.946.910-#",0);
+$pdf->Cell(0,5,"Nit. 1.095.946.910-4",0);
 $pdf->Ln(3);
 #$pdf->SetFont('Courier', '', 10);
 $pdf->Cell(26,5,"",0);
@@ -39,8 +39,8 @@ $pdf->Ln(3);
 
 $pdf->Ln(6);
 $pdf->SetFont('Courier', 'B', 13);
-$pdf->Cell(26,5,"",0);
-$pdf->Cell(39,5,"INGRESO",0);
+$pdf->Cell(10,5,"",0);
+$pdf->Cell(39,5,"INGRESO MENSUALIDAD",0);
 $pdf->Ln(7);
 $pdf->Cell(3,5,"",0);
 $pdf->SetFont('Courier', 'B', 11);
@@ -64,12 +64,12 @@ $pdf->SetFont('Courier', 'B', 13);
 $pdf->Cell(22,5,"",0);
 $pdf->Cell(39,5,"Bienvenido!",0);
 
-$pdf->Output("factura-empresa.pdf","I");
+#$pdf->Output("factura-empresa.pdf","I");
 $diasr = 1;
 factent3($placa2, $estado, $horai, $horas, $fechai, $fechas, $diasr);
 
-#$pdf->AutoPrint(true);
-#$pdf->Output();
+$pdf->AutoPrint(true);
+$pdf->Output();
 
 /*******************************************************************************/
 ?>

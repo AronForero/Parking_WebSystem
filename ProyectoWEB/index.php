@@ -5,13 +5,21 @@
     <meta name="" content="" charset="utf-8"></meta>
     <link rel="stylesheet" type="text/css" href="css/loginSS.css" media="screen"/>
    <meta name="viewport" content="width=device-width, initial-scale=1" />
+   <script>
+  function actionForm(formid, act, tar)
+  {
+      document.getElementById(formid).action=act;
+      document.getElementById(formid).target=tar;
+      document.getElementById(formid).submit();
+  }
+</script>
 
    <!-- <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300i" rel="stylesheet">-->
 </head>
 
 <?php
 session_start();
-if ($_SESSION['user']!="root") {
+if ($_SESSION['user']!="admin") {
 
  ?>
  
@@ -24,11 +32,12 @@ if ($_SESSION['user']!="root") {
        <form action="php/login.php" method="POST" id="ingresar">
         <!-- <label for="">Iniciar Sesión</label></br>-->
 
-            &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;<input type="text" name="id" placeholder="ID o Login"></br>
+            &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;<input type="text" name="id" id="user" placeholder="Usuario" required="" style="height:45"></br>
 
-            &ensp;&ensp;&ensp;&ensp;<input type="password" name="pass" placeholder="Contraseña"></br></br></br>
+            &ensp;&ensp;&ensp;&ensp;<input type="password" name="pass" id="user" placeholder="Contraseña" required></br></br></br>
 
-             <input type="image" value="Ingresar" src="images/INGRESAR.png" height="67" width="303"/>
+
+             <input type="image" src="images/INGRESAR.png" height="67" width="303" onClick="actionForm(this.form.id, 'php/login.php', _parent);" />
              
               <!--<input type="reset" id="boton" value="" onClick="limpiar(form)" />-->
 
@@ -51,6 +60,6 @@ else {
  ?>
 </html>
 <?php
-header("refresh: 0; url=ConsultaPlaca.php");
+header("refresh: 0; url=index.php");
 }
  ?>

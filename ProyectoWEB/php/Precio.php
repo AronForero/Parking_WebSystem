@@ -8,15 +8,34 @@ function price($fechaing, $cascos, $horaing, $preciohorabase, $tipo, $daily, $ha
   $año = date('Y');
   $Month = date('m');
   $Day = date('d');
-  if (date("i", time()) < date("i", strtotime($horaing))) {
-    $difminutos = date("i", time())+(60-date("i", strtotime($horaing)));
+
+  $minent = date("i", strtotime($horaing));
+  $minsal = date("i", time());
+
+  if ($minsal < $minent) {
+    if ($minent <= 50) {
+      if ($minsal <= ($minent+10)) {
+        $difminutos = 5;
+      }
+      else {
+        $difminutos = 15;
+      }
+    }
+    else {
+      if ($minsal <= ($minent - 50) || $minent <= 60) {
+        $difminutos = 5;
+      }
+      else {
+        $difminutos = 15;
+      }
+    }
   }
   else {
-    $difminutos = date("i", time()) - date("i", strtotime($horaing));
+    $difminutos = $minsal - $minent;
   }
 
   if ($tipo == "MOTO") {
-    $preciodia = 3000;
+    $preciodia = 4000;
   }
   else {
     if ($tipo == "CARRO") {
@@ -25,7 +44,7 @@ function price($fechaing, $cascos, $horaing, $preciohorabase, $tipo, $daily, $ha
      }
      else{
        $preciodia = 12000;
-       $mediodia = 7000;
+       $mediodia = 6000;
      }
   }
 
@@ -35,14 +54,14 @@ function price($fechaing, $cascos, $horaing, $preciohorabase, $tipo, $daily, $ha
       if ($Day == date("d", strtotime($fechaing)))
       {
         #echo "Los dias son iguales";
-            $difhoras = (date("H:i:s", time()))-$horaing;
+            $difhoras = (date("H", time()))-$horaing;
             if ($daily == "SI")
             {
                 if ($difhoras <= 12) {
                   $Tpago = $preciodia + ($cascos*200);
                 }
                 else {
-                  if ($difminutos >= 15) {
+                  if ($difminutos >= 10) {
                       $Tpago = $preciodia + ($cascos*200) + $difhoras*$preciohorabase;
                   }
                   else {
@@ -50,14 +69,14 @@ function price($fechaing, $cascos, $horaing, $preciohorabase, $tipo, $daily, $ha
                   }
                 }
             }
-            else 
+            else
             {
               if ($halfday=="SI") {
                 if ($difhoras <= 7) {
                   $Tpago = $mediodia + ($cascos*200);
                 }
                 else {
-                  if ($difminutos >= 15) {
+                  if ($difminutos >= 10) {
                       $Tpago = $mediodia + ($cascos*200) + ($difhoras-7)*$preciohorabase;
                   }
                   else {
@@ -70,15 +89,25 @@ function price($fechaing, $cascos, $horaing, $preciohorabase, $tipo, $daily, $ha
                   if ($difhoras == 0)
                   {
                     #se creo la variable difminutos arriba
-                    $Tpago = $preciohorabase + ($cascos*200);
+                    if ($difminutos >= 10) {
+                          $Tpago = ($cascos*200) + $preciohorabase;
+                      }
+                      else {
+                        $Tpago = ($cascos*200) + 500;
+                      }
                   }
                   else {
-                      $Tpago = ($difhoras*$preciohorabase)+($cascos*200);
-                      if ($difminutos >= 15) {
+                      #$Tpago = ($difhoras*$preciohorabase)+($cascos*200); elimine esta parte que esta de mas
+                      if ($difminutos >= 10) {
                           $Tpago = ($cascos*200) + $difhoras*$preciohorabase;
                       }
                       else {
-                        $Tpago = ($cascos*200) + $difhoras*$preciohorabase - $preciohorabase;
+                        if ($difhoras == 1) {
+                          $Tpago = ($cascos*200) + $difhoras*$preciohorabase;
+                        }
+                        else if($difhoras > 1){
+                          $Tpago = ($cascos*200) + $difhoras*$preciohorabase - $preciohorabase;
+                        }
                       }
                   }
               }

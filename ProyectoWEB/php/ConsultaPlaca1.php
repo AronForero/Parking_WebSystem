@@ -26,14 +26,15 @@ date_default_timezone_set('America/Bogota');
 
 $placa = $_POST["placa"];
 $preciohora = $_POST["preciohora"];
-$mediodia = $_POST["medio"];
-$diario = $_POST["diario"];
+$tipopago = $_POST["tipopago"];
 $tipo = $_POST["tipo"];
 $tipovehiculo = $_POST["tipo"];
 
 $con = Conexion();
 
-$consulta2 = "SELECT * FROM mensuales WHERE placa = '$placa' AND mensual = 'SI'";
+$consulta2 = "select * from mensuales where placa = '$placa' AND mensual ='SI'";
+
+
 $execute = pg_query($con, $consulta2);
 $numfilas2 = pg_numrows($execute);
 
@@ -62,6 +63,7 @@ if ($numfilas2 > 0) {
 
 
   <?php
+  header("refresh: 10; url=../ConsultaPlaca.php");
   }
   else{
     if ($estado == "t") {
@@ -100,7 +102,7 @@ if ($numfilas2 > 0) {
 
 
 <?php
-
+  header("refresh: 10; url=../ConsultaPlaca.php");
     }
   }
 }
@@ -108,38 +110,46 @@ if ($numfilas2 > 0) {
 /***********FIN DE PARTE DE MENSUALIDADES************/
 else
 {
-  $consulta = "SELECT * FROM vehiculo WHERE placa='$placa'";
+  $consulta = "select * from vehiculo where placa='$placa'";
   $ejecuta= pg_query($con, $consulta);
   $numfilas = pg_numrows($ejecuta);
 
-
+  /******AQUI LLENO LAS VARIABLES SEGUN EL TIPO DE PAGO****/
+  if ($tipopago == "GENERAL") {
+    $diario = "NO";
+    $mediodia = "NO";
+  }
+  else{
+    if ($tipopago == "MEDIODIA") {
+      $diario = "NO";
+      $mediodia = "SI";
+    }
+    else{
+      if ($tipopago == "DIAENTERO") {
+      $diario = "SI";
+      $mediodia = "NO";
+    }
+    }
+  }
+  /**********************************************************/
   if ($preciohora == -1) {
     if ($tipo == "MOTO") {
       $preciohora = 1000;
+      $tipo = 1;
     }
     else {
       if ($tipo == "CARRO") {
-         $preciohora = 2300;
+         $preciohora = 2000;
+         $tipo = 2;
        }
        else{
-         $preciohora = 3000;
+         $preciohora = 2500;
+         $tipo = 3;
        }
     }
   }
 
-  if ($tipo == "MOTO") {
-    $tipo = 1;
-    }
-    else {
-      if ($tipo == "CARRO") {
-         $tipo = 2;
-       }
-       else{
-         $tipo = 3;
-       }
-    }
-
-  if ($numfilas ==  '0')
+  if ($numfilas == '0')
   {
     ?>
     <center>
@@ -152,6 +162,7 @@ else
         <input type="hidden" name="pago" value="<?php echo $preciohora ?>" >
         <input type="hidden" name="fechas" value="<?php echo date('Y-m-d'); ?>" >
         <input type="hidden" name="tipo" value="<?php echo $tipo ?>">
+        <input type="hidden" name="tipopago" value="<?php echo $tipopago ?>">
         <input type="hidden" id="cascos" name="cascos" value="0" ></br>
         <!--Se agrego un hidden con el tipo de vehiculo-->
         <!------------------------------------------------------------------------>
@@ -172,14 +183,12 @@ else
 
 
   <?php
-   /*header("refresh: 10; url=../ConsultaPlaca.php");DESCOMENTARIARRRRRRRRRR!*/
+   header("refresh: 15; url=../ConsultaPlaca.php");
   }
   else 
   {
     $fila = pg_fetch_array($ejecuta);
     $estado = $fila["estado"];
-    #se elimino variable month que indicaba si se habia pagado mensualidad
-    #se elimino la variable que indicaba la fecha de cuando se acababa la mensualidad
     $daily = $fila["9"];
     $halfday = $fila["11"];
 
@@ -191,15 +200,13 @@ else
          <center> &ensp;&ensp;&ensp;&ensp;<b>INGRESO</b></center></br>
         <b><font size = 7> &ensp;&ensp;&ensp;&ensp;&ensp;Placa:</b></font><input type="text" id="placa" name="placa2" maxlength="6" placeholder="Placa" height="100" size="10" style="height:45"  value="<?php echo $placa; ?>"></br></br>
 
-
-
-
           <input type="hidden" name="estado" value="t">
           <input type="hidden" name="horas" value="<?php echo date("H:i:s", time()); ?>">
           <input type="hidden" name="pago" value="<?php echo $preciohora ?>">
           <input type="hidden" name="fechas" value="<?php echo date('Y-m-d'); ?>">
           <input type="hidden" name="diario2" value="<?php echo $diario ?>"> <!--ACA PUSE LO DEL DIARIO Y ARRIBA ESTAN LAS OTRAS HIDDEN -->
           <input type="hidden" name="mediodia" value="<?php echo $mediodia ?>">
+          <input type="hidden" name="tipopago" value="<?php echo $tipopago ?>">
           <input type="hidden" name="tipo" value="<?php echo $tipo ?>">
           <input type="hidden" name="cascos" value="0">
           <!--se agrego un hidden para la variable tipo-->
@@ -215,7 +222,7 @@ else
       </form>
 
     <?php
-   /*header("refresh: 10; url=../ConsultaPlaca.php");DESCOMENTARIARRRRRRRRRR!*/
+   header("refresh: 15; url=../ConsultaPlaca.php");
       }
     else 
     {
@@ -297,7 +304,7 @@ else
       </form>
       </center>
   <?php
-   /*header("refresh: 10; url=../ConsultaPlaca.php");DESCOMENTARIARRRRRRRRRR!*/
+   header("refresh: 15; url=../ConsultaPlaca.php");
     }
   }
 }

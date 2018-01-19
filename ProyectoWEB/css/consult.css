@@ -5,8 +5,12 @@
     src: local("?"), url("../fonts/HandelGothic.eot") format("eot"), url("../fonts/HandelGothic.ttf") format("truetype");
 }
 
+
 #FONDO2
 {position: absolute; top:0; left: 0;width: 100%; z-index: -1; height: 100%}
+
+#fondomen
+{position: absolute; top:0; left: 0; z-index: -1;width:1000; height:670}
 
 #form1{
 	position: absolute;
@@ -62,6 +66,40 @@ h1{
 	font-size: 40;
 	font-family: Futura;
 }
+
+#title{
+	font-family: Futura;
+	
+}
+.boton1{
+	font-family: Futura;
+	font-size: 25;
+	height: 40;
+	border: 1px solid #DBE1EB;
+	padding-left: 7px;
+	padding-right: 7px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	border-radius: 4px;
+	   
+}
+
+#consultafont{
+	
+font-family: Futura;
+font-size: 35;
+}
+
+.consultacaja{
+background-size: 100% 150%;
+}
+
+.mensualid{
+font-family: Futura;
+background-size: 100% 150%;
+}
+
+
 /*
 #form1
 {
@@ -248,12 +286,12 @@ h1{
 }
 */
 .tabelle {
-	width: 578px; border-collapse: collapse; 
+	width: 578px; border-collapse: collapse; font-family: Futura;
 }
 .zelle{
 	padding: 3px; 
 	background-color: White; 
-	font-family: Arial; 
+	
 	font-size: 12px;
 	text-align: center; 
 	color: Black; 
@@ -263,7 +301,7 @@ th {
 	padding: 3px; 
 	color: White; 
 	font-size: 12px;
-	font-family: Arial; 
+	
 }
 .separate {
 	border-radius: 10px;

@@ -4,16 +4,17 @@ extract($_POST);
 include("Connection.php");
 $conn=Conexion();
 
-$consulta = "SELECT * FROM usuarios WHERE login='$id'";
+
+$consulta = "select * from usuario WHERE login='$id'";
 $execute = pg_query($conn, $consulta);
 $pas = pg_fetch_array($execute);
 
-$consulta2 = "SELECT numfactura FROM log WHERE estado='f' ORDER BY registro DESC";
+$consulta2 = "select numfactura FROM log WHERE estado='f' ORDER BY registro DESC";
 $execute2 = pg_query($conn, $consulta2);
 $fact = pg_fetch_array($execute2);
 
 if ($pas["1"]==$pass) {
-  $_SESSION['user']="root";
+  $_SESSION['user']="admin";
   $_SESSION['fact']=$fact["0"];
   echo "Acceso Concedido";
   header("refresh: 0; url=../ConsultaPlaca.php");
